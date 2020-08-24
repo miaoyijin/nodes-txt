@@ -87,4 +87,4 @@ RUN make && make install
 RUN chown -R httpd:httpd /opt
 COPY src/nginx/conf/ ${INSTALL_NGINX_DIR}/conf/
 EXPOSE 80 443 9000
-CMD ['/opt/app/nginx/sbin/nginx -g daemon off && /opt/app/php72/sbin/php-fpm --nodaemonize']
+CMD ['/opt/app/nginx/sbin/nginx && /opt/app/php72/sbin/php-fpm --nodaemonize']
