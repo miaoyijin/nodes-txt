@@ -64,14 +64,13 @@ RUN tar -jxvf /tmp/php-7.2.24.tar.bz2 -C /tmp \
     && mkdir -p /opt/logs/php72 && chown httpd. /opt/logs/php72 \
     && rm -r /tmp/php-7.2.24
 
-RUN /opt/app/php72/bin/pecl install redis
 #RUN /opt/app/php72/bin/pecl install amqp
-RUN /opt/app/php72/bin/pecl install mongodb
+RUN /opt/app/php72/bin/pecl install redis && /opt/app/php72/bin/pecl install mongodb
 
-ADD src/nginx/nginx-1.12.1.tar.gz /tmp/
-RUN tar -jxvf /tmp/nginx-1.12.1.tar.gz -C /tmp \
-    && cd /tmp/php-7.2.24 \
-    ./configure \
+COPY src/nginx/nginx-1.12.1.tar.gz /tmp/
+RUN tar -zxvf /tmp/nginx-1.12.1.tar.gz -C /tmp \
+    && cd /tmp/nginx-1.12.1 \
+    && ./configure \
     --prefix=${INSTALL_NGINX_DIR} \
     --conf-path=/usr/local/nginx/conf/nginx.conf \
     --pid-path=/usr/local/nginx/conf/nginx.pid \
@@ -84,8 +83,8 @@ RUN tar -jxvf /tmp/nginx-1.12.1.tar.gz -C /tmp \
     --http-fastcgi-temp-path=/var/temp/nginx/fastcgi \
     --http-uwsgi-temp-path=/var/temp/nginx/uwsgi \
     --http-scgi-temp-path=/var/temp/nginx/scgi
-
+RUN make && make install
 RUN chown -R httpd:httpd /opt
-copy conf/ ${INSTALL_NGINX_DIR}/conf/
+COPY src/nginx/conf/ ${INSTALL_NGINX_DIR}/conf/
 EXPOSE 80 443 9000
 CMD ['/opt/app/nginx/sbin/nginx -g daemon off && /opt/app/php72/sbin/php-fpm --nodaemonize']
