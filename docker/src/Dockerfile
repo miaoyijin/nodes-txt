@@ -2,7 +2,7 @@ FROM centos:7
 
 ENV INSTALL_PHP_DIR=/opt/app/php72 \
 INSTALL_NGINX_DIR=/opt/app/nginx
-ADD src/php/php-7.2.24.tar.bz2 /tmp/
+ADD php/php-7.2.24.tar.bz2 /tmp/
 RUN rm -f /etc/yum.repos.d/epel.repo
 RUN  echo '[epel]' >> /etc/yum.repos.d/epel.repo
 RUN  echo 'name=base' >>  /etc/yum.repos.d/epel.repo
@@ -63,12 +63,12 @@ RUN tar -jxvf /tmp/php-7.2.24.tar.bz2 -C /tmp \
     && useradd -g 2000 -u 2000 httpd \
     && mkdir -p /opt/logs/php72 && chown httpd. /opt/logs/php72 \
     && rm -r /tmp/php-7.2.24
-COPY src/php/etc/ ${INSTALL_PHP_DIR}/etc
+COPY php/etc/ ${INSTALL_PHP_DIR}/etc
 RUN /opt/app/php72/bin/pecl install redis && /opt/app/php72/bin/pecl install mongodb \
 && echo "extension=redis.so" >> ${INSTALL_PHP_DIR}/etc/php.ini \
 && echo "extension=mongodb.so" >> ${INSTALL_PHP_DIR}/etc/php.ini
 
-COPY src/nginx/nginx-1.12.1.tar.gz /tmp/
+COPY nginx/nginx-1.12.1.tar.gz /tmp/
 RUN tar -zxvf /tmp/nginx-1.12.1.tar.gz -C /tmp \
     && cd /tmp/nginx-1.12.1 \
     && ./configure \
@@ -88,6 +88,6 @@ RUN mkdir -p /var/temp/nginx/client && mkdir /opt/app/php72/var/logs/ \
 && mkdir /opt/app/php72/logs/
 RUN cd /tmp/nginx-1.12.1 && make && make install
 RUN chown -R httpd:httpd /opt
-COPY src/nginx/conf/ ${INSTALL_NGINX_DIR}/conf/
+COPY nginx/conf/ ${INSTALL_NGINX_DIR}/conf/
 EXPOSE 80 443 9000
 CMD /opt/app/nginx/sbin/nginx && /opt/app/php72/sbin/php-fpm --nodaemonize
