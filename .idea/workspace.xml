@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8029b49b-2d93-40f0-aa09-7dbdab2fccf3" name="Default" comment="" />
+    <list default="true" id="8029b49b-2d93-40f0-aa09-7dbdab2fccf3" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/八大菜系/数据库/mysql/索引类型.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,7 +16,20 @@
     <favorites_list name="dd_time" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file leaf-file-name="索引类型.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/八大菜系/数据库/mysql/索引类型.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="238">
+                <caret line="14" selection-start-line="14" selection-end-line="14" selection-end-column="8" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -26,6 +42,7 @@
         <option value="$PROJECT_DIR$/八大菜系/敏捷开发/继续交付.php" />
         <option value="$PROJECT_DIR$/八大菜系/敏捷开发/readMe.txt" />
         <option value="$PROJECT_DIR$/八大菜系/敏捷开发/readMe.md" />
+        <option value="$PROJECT_DIR$/八大菜系/数据库/mysql/索引类型.md" />
       </list>
     </option>
   </component>
@@ -39,8 +56,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="397" />
-    <option name="y" value="29" />
+    <option name="x" value="395" />
+    <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="794" />
   </component>
@@ -60,11 +77,6 @@
             <path>
               <item name="dd-time" type="b2602c69:ProjectViewProjectNode" />
               <item name="dd-time" type="462c0819:PsiDirectoryNode" />
-              <item name="docker" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="dd-time" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dd-time" type="462c0819:PsiDirectoryNode" />
               <item name="八大菜系" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -77,8 +89,14 @@
               <item name="dd-time" type="b2602c69:ProjectViewProjectNode" />
               <item name="dd-time" type="462c0819:PsiDirectoryNode" />
               <item name="八大菜系" type="462c0819:PsiDirectoryNode" />
-              <item name="敏捷开发" type="462c0819:PsiDirectoryNode" />
-              <item name="devops" type="462c0819:PsiDirectoryNode" />
+              <item name="数据库" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dd-time" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dd-time" type="462c0819:PsiDirectoryNode" />
+              <item name="八大菜系" type="462c0819:PsiDirectoryNode" />
+              <item name="数据库" type="462c0819:PsiDirectoryNode" />
+              <item name="mysql" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -95,15 +113,19 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.build" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/八大菜系/敏捷开发" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/八大菜系/敏捷开发/devops" />
       <recent name="$PROJECT_DIR$/八大菜系/敏捷开发" />
       <recent name="$PROJECT_DIR$/八大菜系/php" />
       <recent name="$PROJECT_DIR$/八大菜系/数据库" />
       <recent name="$PROJECT_DIR$/docker" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/八大菜系/消息队列" />
+      <recent name="$PROJECT_DIR$/八大菜系/数据结构和算法" />
+      <recent name="$PROJECT_DIR$/八大菜系/数据库/mongodb" />
+      <recent name="$PROJECT_DIR$/八大菜系/数据库/mysql" />
+      <recent name="$PROJECT_DIR$/八大菜系/数据库/redis" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -132,46 +154,36 @@
       <workItem from="1598278731376" duration="346000" />
       <workItem from="1599869051395" duration="1941000" />
       <workItem from="1599972554231" duration="1544000" />
+      <workItem from="1599974677823" duration="2646000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4266000" />
+    <option name="totallyTimeSpent" value="6912000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="397" y="67" width="1440" height="794" extended-state="0" />
+    <frame x="448" y="52" width="1440" height="794" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7446198" visible="true" weight="0.16523606" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.74175036" visible="true" weight="0.2067239" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32998565" />
-      <window_info id="Favorites" order="2" sideWeight="0.2553802" side_tool="true" weight="0.16523606" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.0" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="2" sideWeight="0.25824964" side_tool="true" visible="true" weight="0.2067239" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7446198" visible="true" weight="0.16523606" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info id="Favorites" order="2" sideWeight="0.2553802" side_tool="true" visible="true" weight="0.16523606" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,64 +193,20 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/八大菜系/敏捷开发/继续集成.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/八大菜系/敏捷开发/继续交付.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="2" selection-start-line="9" selection-start-column="2" selection-end-line="9" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/八大菜系/敏捷开发/继续集成.php" />
+    <entry file="file://$PROJECT_DIR$/八大菜系/敏捷开发/继续交付.php" />
     <entry file="file://$PROJECT_DIR$/docker/docker-compose.yml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/docker/Dockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docker/Dockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="89" column="31" selection-start-line="89" selection-start-column="31" selection-end-line="89" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/docker/Dockerfile" />
+    <entry file="file://$PROJECT_DIR$/docker/Dockerfile" />
     <entry file="file://$PROJECT_DIR$/docker/docker-compose.yml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/八大菜系/敏捷开发/readMe.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="5" selection-start-column="5" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/八大菜系/敏捷开发/继续集成.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="2" lean-forward="true" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/八大菜系/敏捷开发/继续交付.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="13" lean-forward="true" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/八大菜系/敏捷开发/CI:CD流程.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/八大菜系/敏捷开发/readMe.txt" />
+    <entry file="file://$PROJECT_DIR$/八大菜系/敏捷开发/继续集成.php" />
+    <entry file="file://$PROJECT_DIR$/八大菜系/敏捷开发/继续交付.php" />
+    <entry file="file://$PROJECT_DIR$/八大菜系/敏捷开发/CI:CD流程.png" />
     <entry file="file://$PROJECT_DIR$/八大菜系/敏捷开发/readMe.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -277,11 +245,48 @@
     <entry file="file://$PROJECT_DIR$/八大菜系/敏捷开发/devops/CI_CD流程.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/八大菜系/go/.gitkeep">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/八大菜系/php/swoole/.gitkeep">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/八大菜系/分布式/.gitkeep">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/八大菜系/数据库/redis/.gitkeep">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/八大菜系/数据库/mysql/.gitkeep">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/八大菜系/数据库/mongodb/.gitkeep">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/八大菜系/数据结构和算法/.gitkeep">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/八大菜系/消息队列/.gitkeep">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/八大菜系/敏捷开发/readMe.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="34">
-            <caret line="2" column="28" lean-forward="true" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
+          <first_editor>
+            <caret column="5" lean-forward="true" selection-start-column="5" selection-end-column="5" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/八大菜系/tcp_ip/.gitkeep">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/八大菜系/数据库/mysql/索引类型.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="238">
+            <caret line="14" selection-start-line="14" selection-end-line="14" selection-end-column="8" />
           </first_editor>
           <second_editor />
         </state>
