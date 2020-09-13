@@ -1,24 +1,25 @@
 version: '3'
 services:
-  nginx-php:
-    build: 
-      context: ./
+  nginx-php72:
+    build:
+      context: ./src/
+      dockerfile: Dockerfile
     restart: always
     ports:
     - "${NGINX_HTTP_HOST_PORT}:80"
     volumes:
     - ${SOURCE_DIR}:/opt/case
-    extra_hosts:
+    #extra_hosts:
+    #links:
     networks:
-      mywebnet:
-        ipv4_address: 192.168.0.1
-    links:
+      default:
+        ipv4_address: 10.10.0.1
     tty: true
     cap_add:
     - SYS_PTRACE
 networks:
-  mywebnet:
+  default:
     driver: bridge
     ipam:
       config:
-      - subnet: 192.168.0.0/16
+      - subnet: 10.10.0.0/16
