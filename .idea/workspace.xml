@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8029b49b-2d93-40f0-aa09-7dbdab2fccf3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/八大菜系/tcp_ip/readMe.md" beforeDir="false" afterPath="$PROJECT_DIR$/八大菜系/tcp_ip/readMe.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/八大菜系/tcp_ip/tcp 三次握手.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,12 +17,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="readMe.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="readMe.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/八大菜系/tcp_ip/readMe.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="192">
-                <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+              <first_editor relative-caret-position="256">
+                <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tcp 三次握手.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/八大菜系/tcp_ip/tcp 三次握手.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="48">
+                <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
               </first_editor>
               <second_editor />
             </state>
@@ -45,6 +58,7 @@
         <option value="$PROJECT_DIR$/八大菜系/数据库/mysql/索引.md" />
         <option value="$PROJECT_DIR$/八大菜系/数据库/mysql/锁.md" />
         <option value="$PROJECT_DIR$/八大菜系/tcp_ip/readMe.md" />
+        <option value="$PROJECT_DIR$/八大菜系/tcp_ip/tcp 三次握手.md" />
       </list>
     </option>
   </component>
@@ -57,9 +71,9 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="333" />
-    <option name="y" value="105" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="171" />
+    <option name="y" value="201" />
     <option name="width" value="1440" />
     <option name="height" value="795" />
   </component>
@@ -69,7 +83,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -88,16 +101,11 @@
               <item name="八大菜系" type="462c0819:PsiDirectoryNode" />
               <item name="tcp_ip" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="dd-time" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dd-time" type="462c0819:PsiDirectoryNode" />
-              <item name="八大菜系" type="462c0819:PsiDirectoryNode" />
-              <item name="敏捷开发" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -108,19 +116,19 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.build" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/八大菜系/敏捷开发/devops" />
-      <recent name="$PROJECT_DIR$/八大菜系/敏捷开发" />
-      <recent name="$PROJECT_DIR$/八大菜系/php" />
-      <recent name="$PROJECT_DIR$/八大菜系/数据库" />
-      <recent name="$PROJECT_DIR$/docker" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\www\wpimages\www\dd-time\八大菜系\tcp_ip" />
       <recent name="$PROJECT_DIR$/八大菜系/数据库/mysql" />
       <recent name="$PROJECT_DIR$/八大菜系/消息队列" />
       <recent name="$PROJECT_DIR$/八大菜系/数据结构和算法" />
       <recent name="$PROJECT_DIR$/八大菜系/数据库/mongodb" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/八大菜系/敏捷开发/devops" />
+      <recent name="$PROJECT_DIR$/八大菜系/敏捷开发" />
+      <recent name="$PROJECT_DIR$/八大菜系/php" />
+      <recent name="$PROJECT_DIR$/八大菜系/数据库" />
+      <recent name="$PROJECT_DIR$/docker" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -152,12 +160,14 @@
       <workItem from="1599974677823" duration="2937000" />
       <workItem from="1599992128755" duration="4660000" />
       <workItem from="1600132696174" duration="1639000" />
-      <workItem from="1600139970656" duration="3819000" />
+      <workItem from="1600139970656" duration="4701000" />
+      <workItem from="1600153384188" duration="11000" />
+      <workItem from="1600219713507" duration="403000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17321000" />
+    <option name="totallyTimeSpent" value="18617000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -169,13 +179,13 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.23226951" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.87765956" visible="true" weight="0.03556993" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8244681" visible="true" weight="0.28698465" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="kafkalytic" order="3" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Favorites" order="2" sideWeight="0.122340426" side_tool="true" visible="true" weight="0.03556993" />
+      <window_info id="Favorites" order="2" sideWeight="0.17553191" side_tool="true" visible="true" weight="0.28698465" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -329,11 +339,24 @@
     <entry file="file://$PROJECT_DIR$/八大菜系/tcp_ip/mss协商.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/八大菜系/tcp_ip/滑动窗口.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/八大菜系/tcp_ip/readMe.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="192">
-            <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+          <first_editor relative-caret-position="256">
+            <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/八大菜系/tcp_ip/tcp 三次握手.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="48">
+            <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
           </first_editor>
           <second_editor />
         </state>
