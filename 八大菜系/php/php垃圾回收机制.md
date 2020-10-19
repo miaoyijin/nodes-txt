@@ -23,3 +23,20 @@ ZendMMÔÚÄÚ´æÏú»ÙµÄ´¦ÀíÉÏ²ÉÓÃÓëÄÚ´æÉêÇëÏàÍ¬µÄ²ßÂÔ£¬µ±³ÌÐòunsetÒ»¸ö±äÁ¿»òÕßÊÇÆäËûµ
 Èç¹û±äÁ¿µÄÒýÓÃ¼ÆÊý´óÓÚ1£¬¼´¼õÒ»ºóÒýÓÃ¼ÆÊý´óÓÚ0£¬Ôò½«±äÁ¿·ÅÈëÀ¬»øÁÐ±í¡£Èç¹û±äÁ¿´æÔÚÒýÓÃ£¬ÔòÈ¥µôÆäÒýÓÃ¡£
 ½«±äÁ¿·ÅÈëÀ¬»øÁÐ±íµÄ²Ù×÷ÊÇGC_ZVAL_CHECK_POSSIBLE_ROOT£¬ÕâÒ²ÊÇÒ»¸öºê£¬Æä¶ÔÓ¦º¯Êýgc_zval_check_possible_root£¬µ«ÊÇ´Ëº¯Êý½ö¶ÔÊý×éºÍ¶ÔÏóÖ´ÐÐÀ¬»ø»ØÊÕ²Ù×÷¡£
 ¶ÔÓÚÊý×éºÍ¶ÔÏó±äÁ¿£¬Ëü»áµ÷ÓÃgc_zval_possible_rootº¯Êý¡£
+
+php À¬»ø»ØÊÕ»úÖÆ
+1£ºÊ²Ã´ÊÇ¿ÉÄÜ¸ù
+eg£º$a = [111];
+    $a[0] = $a;
+    $a[1] = $a;
+    $b = $a;
+    unset($a);
+    ´ËÊ±»á°Ñ$a·ÅÈë¿ÉÄÜ»º´æ¸ù£¬ÒòÎªrefcount >1
+    
+2£ººÎÊ±Ö´ÐÐ»ØÊÕÖÜÆÚ »º´æ¸ùÂúÁã»òÊÇÊÖ¶¯Ö´ÐÐÀ¬»ø»ØÊÕÖÜÆÚ
+
+3£ºÈçºÎÖ´ÐÐÀ¬»ø»ØÊÕÖÜÆÚ
+¼òµ¥×Ü½á£º¶Ô$aÏÂ¶ÔËùÓÐ×ÓÔªËØÖ´ÐÐ-1²Ù×÷£¬Èç¹û×îºóref_count > 1 ±íÊ¾»¹²»ÊÇÀ¬»ø±ÈÈçÉÏÃæµÄµÄ$b = $a;¼´ÎÞ·¨»ØÊÕ¡£
+²Î¿¼£ºhttps://www.php.net/manual/zh/features.gc.collecting-cycles.php
+
+4£ºÎªÊ²Ã´ÒªÒýÈë¿ÉÄÜ»º´æ¸ù£¬²»ÔÚunsetµÄÊ±ºòÊµÊ±ÔËÐÐÇå³þÀ¬»ø£¬ÒòÎªÐ§ÂÊÎÊÌâ£¬ÊµÊ±¼ÆËãÌ«·ÑÊ±¼ä¡£
