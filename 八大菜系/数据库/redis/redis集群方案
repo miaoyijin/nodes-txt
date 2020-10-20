@@ -1,0 +1,5 @@
+1：本地缓存localcache方案
+
+2：redis hash一致性方案
+
+3：redis cluster 方案
