@@ -1,0 +1,25 @@
+redis 底层数据结构：
+1、简单动态字符串
+2、链表
+3、字典
+4、跳跃表
+5、整数集合
+6、压缩列表
+
+
+list  =》链表在Redis中应用的非常广，列表（List）的底层实现就是链表
+key =》sds
+hash => 字典
+zset => 跳跃链表
+set =》 整数集合，或是hashtable
+
+
+那到底什么是robj呢？它有什么用呢？
+
+从Redis的使用者的角度来看，一个Redis节点包含多个database（非cluster模式下默认是16个，cluster模式下只能是1个），而一个database维护了从key space到object space的映射关系。
+这个映射关系的key是string类型，而value可以是多种数据类型，比如：string, list, hash等。我们可以看到，key的类型固定是string，而value可能的类型是多个。
+
+而从Redis内部实现的角度来看，在前面第一篇文章中，我们已经提到过，一个database内的这个映射关系是用一个dict来维护的。dict的key固定用一种数据结构来表达就够了，这就是动态字符串sds。
+而value则比较复杂，为了在同一个dict内能够存储不同类型的value，这就需要一个通用的数据结构，这个通用的数据结构就是robj（全名是redisObject）。
+举个例子：如果value是一个list，那么它的内部存储结构是一个quicklist（quicklist的具体实现我们放在后面的文章讨论）；如果value是一个string，那么它的内部存储结构一般情况下是一个sds。
+当然实际情况更复杂一点，比如一个string类型的value，如果它的值是一个数字，那么Redis内部还会把它转成long型来存储，从而减小内存使用。而一个robj既能表示一个sds，也能表示一个quicklist，甚至还能表示一个long型。
