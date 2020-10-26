@@ -1,5 +1,36 @@
-1:explain
+1:explain查看查询的字段,
+避免 SELECT *，需要什么数据，就查询对应的字段。
+合理使用索引（下文介绍）。如：为排序、分组字段建立索引，避免 filesort 的出现
+使用覆盖索引
 
-2：分库分表
+2：索引使用
+不适合使用索引的场景
+1) 频繁更新的字段
 
-3：数据库性能调优
+2) where 条件中用不到的字段
+
+3) 表记录太少
+
+4) 经常增删改的表
+
+5) 字段的值的差异性不大或重复性高
+6）不要对索引列进行任何操作（计算、函数、类型转换）
+
+
+
+3：分库分表&读写分离
+
+4：数据库性能调优
+1）Innodb_buffer_pool_size 设置
+2）数据预热
+
+5）调大排序内存
+即一遍扫描数据后将select需要的列数据以及排序的列数据都取出来，这样就不需要进行第二遍扫描了，当然内存不足时也会使用磁盘临时文件进行外排。
+
+MySQL根据max_length_for_sort_data来判断排序时使用一遍扫描还是两遍扫描。
+如果需要的列数据一行可以放入max_length_for_sort_data则使用一遍扫描否则使用两遍>扫描
+
+MySQL根据sort_buffer_size来判断是否使用磁盘临时文件，如果需要排序的数据能放入sort_buffer_size则无需使用磁盘临时文件，
+此时explain只会输出using filesort 否则需要使用磁盘临时文件explain会输出using temporary;using filesort
+
+6：show profile 分析数据
