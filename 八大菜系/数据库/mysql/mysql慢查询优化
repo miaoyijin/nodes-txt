@@ -34,3 +34,5 @@ MySQL根据sort_buffer_size来判断是否使用磁盘临时文件，如果需要排序的数据能放入sor
 此时explain只会输出using filesort 否则需要使用磁盘临时文件explain会输出using temporary;using filesort
 
 6：show profile 分析数据
+
+7:es 优化
