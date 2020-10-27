@@ -1,0 +1,20 @@
+1： RSA 加密或签名后的结果是不可读的二进制，使用时经常会转为 BASE64 码再传输。
+2:  RSA 加密时，对要加密数据的大小有限制，最大不大于密钥长度。例如在使用 1024 bit 的密钥时（genrsa -out rsa_private_key.pem 1024），最大可以加密 1024/8=128 Bytes 的数据。数据大于 128 Bytes 时，需要对数据进行分组加密（如果数据超限，加解密时会失败，openssl 函数会返回 false），分组加密后的加密串拼接成一个字符串后发送给客户端。
+为了保证每次加密的结果都不同，RSA 加密时会在待加密数据后拼接一个随机字符串，再进行加密。不同的填充方式 Padding 表示这个字符串的不同长度，在对超限数据进行分组后，会按照这个 Padding 指定的长度填入随机字符串。例如如果 Padding 填充方式使用默认的 OPENSSL_PKCS1_PADDING（需要占用 11 个字节用于填充），那么明文长度最多只能就是 128-11=117 Bytes。
+一般默认使用 OPENSSL_PKCS1_PADDING。PHP 支持的 Padding 有 OPENSSL_PKCS1_PADDING、OPENSSL_SSLV23_PADDING、OPENSSL_PKCS1_OAEP_PADDING 和 OPENSSL_NO_PADDING。
+接收方解密时也需要分组。将加密后的原始二进制数据（对于经过 BASE64 的数据，需要解码），每 128 Bytes 分为一组，然后再进行解密。解密后，根据 Padding 的长度丢弃随机字符串，把得到的原字符串拼接起来，就得到原始报文。
+
+3:OPENSSL_PKCS1_OAEP_PADDING 每次加密的都不一样, 最大只能每次支持117字节。
+
+
+4：rsa 加密数据是变大的。
+
+
+5：OPENSSL_NO_PADDING 同一份数据每次都是一样的
+
+
+不够时候自己补充字符串:
+len = strlen(str);
+	rsa_len = RSA_size(rsa);
+
+	en = (char *)malloc(rsa_len + 1);
