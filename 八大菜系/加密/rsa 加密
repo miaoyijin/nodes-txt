@@ -13,7 +13,7 @@
 5：OPENSSL_NO_PADDING 同一份数据每次都是一样的
 
 
-不够时候自己补充字符串:
+如果超过128位则切割，最后字符串不够不够时候自己补充字符串:
 len = strlen(str);
 	rsa_len = RSA_size(rsa);
 
