@@ -1,0 +1,8 @@
+1 对象序列化
+
+在进行 json_decode解码时注意，如果是序列化的数值型数组，那么json_decode 可以还原为原来的数组，但如果序列化的是关联数组（或者对象），那么由于json_decode无法判断是关联数组还是对象，所以json_decode会默认还原解析为stdclass的对象，如果加第二个参数true才解析为关联数组
+
+2 对象方法
+
+json_encode不能序列化对象的成员方法
+serialize序列化之后，unserialize反序列化的数据，可以重新调用成员方法，但是json_decode不行，会报错
