@@ -6,10 +6,11 @@ ZendMMÔÚÄÚ´æÏú»ÙµÄ´¦ÀíÉÏ²ÉÓÃÓëÄÚ´æÉêÇëÏàÍ¬µÄ²ßÂÔ£¬µ±³ÌÐòunsetÒ»¸ö±äÁ¿»òÕßÊÇÆäËûµ
 ###5.2À¬»ø»ØÊÕ»úÖÆ PHP5.2ÖÐÊ¹ÓÃµÄÄÚ´æ»ØÊÕËã·¨ÊÇ´óÃû¶¦¶¦µÄReference Counting£¬Õâ¸öËã·¨ÖÐÎÄ·­Òë½Ð×ö¡°ÒýÓÃ¼ÆÊý¡±£¬ÆäË¼Ïë·Ç³£Ö±¹ÛºÍ¼ò½à£ºÎªÃ¿¸öÄÚ´æ¶ÔÏó·ÖÅäÒ»¸ö¼ÆÊýÆ÷£¬
 ####µ±Ò»¸öÄÚ´æ¶ÔÏó½¨Á¢Ê±¼ÆÊýÆ÷³õÊ¼»¯Îª1(Òò´Ë´ËÊ±×ÜÊÇÓÐÒ»¸ö±äÁ¿ÒýÓÃ´Ë¶ÔÏó)£¬ÒÔºóÃ¿ÓÐÒ»¸öÐÂ±äÁ¿ÒýÓÃ´ËÄÚ´æ¶ÔÏó£¬Ôò¼ÆÊýÆ÷¼Ó1£¬¶øÃ¿µ±¼õÉÙÒ»¸öÒýÓÃ´ËÄÚ´æ¶ÔÏóµÄ±äÁ¿Ôò¼ÆÊýÆ÷¼õ1£¬
 ####µ±À¬»ø»ØÊÕ»úÖÆÔË×÷µÄÊ±ºò£¬½«ËùÓÐ¼ÆÊýÆ÷Îª0µÄÄÚ´æ¶ÔÏóÏú»Ù²¢»ØÊÕÆäÕ¼ÓÃµÄÄÚ´æ¡£¶øPHPÖÐÄÚ´æ¶ÔÏó¾ÍÊÇzval£¬¶ø¼ÆÊýÆ÷¾ÍÊÇrefcount__gc¡£
+###Ã»ÓÐ×¨ÃÅµÄgc, unsetÊ±ºòref_count µÈÓÚ0 ¾ÍÉ¾³ý¡£
 
 
 ###ÐÂµÄÀ¬»ø»ØÊÕ»úÖÆ
-####php5.3°æ±¾Ö®ºóÒýÈë¸ù»º³å»úÖÆ£¬¼´phpÆô¶¯Ê±Ä¬ÈÏÉèÖÃÖ¸¶¨zvalÊýÁ¿µÄ¸ù»º³åÇø£¨Ä¬ÈÏÊÇ10000£©£¬¡¾µ±php·¢ÏÖÓÐ´æÔÚÑ­»·ÒýÓÃµÄzvalÊ±¡¿£¬
+####php5.3°æ±¾Ö®ºóÒýÈë¡¾¡¾¸ù»º³å»úÖÆ¡¿¡¿£¬¼´phpÆô¶¯Ê±Ä¬ÈÏÉèÖÃÖ¸¶¨zvalÊýÁ¿µÄ¸ù»º³åÇø£¨Ä¬ÈÏÊÇ10000£©£¬¡¾µ±php·¢ÏÖÓÐ´æÔÚÑ­»·ÒýÓÃµÄzvalÊ±¡¿£¬
 ####¾Í»á°ÑÆäÍ¶Èëµ½¸ù»º³åÇø£¬µ±¸ù»º³åÇø´ïµ½ÅäÖÃÎÄ¼þÖÐµÄÖ¸¶¨ÊýÁ¿£¨Ä¬ÈÏÊÇ10000£©ºó£¬¾Í»á½øÐÐÀ¬»ø»ØÊÕ£¬ÒÔ´Ë½â¾öÑ­»·ÒýÓÃµ¼ÖÂµÄÄÚ´æÐ¹Â©ÎÊÌâ
 
 ####À¬»øÖÜÆÚ£ºÖ´ÐÐÀ¬»ø»ØÊÕµÄ¹ý³Ì½ÐÀ¬»øÖÜÆÚ£¬¸ù»º´æÂú²ÅÖ´ÐÐÀ¬»ø»ØÊÕÖÜÆÚ
