@@ -16,6 +16,10 @@
 消费者客户端可以使用partition.assignment.strategy来设置消费者与订阅主题之间的分区分配策略，
 有三种分区分配策略：RangeAssignor、RoundRobinAssignor、StickyAssignor，默认是RangeAssignor
 
+RangeAssignor 1，2，3，4，5   6，7，8，9，10
+
+RoundRobinAssignor  1，3，5，7，9     2，4，6，8，10
+
 RangeAssignor，按照消费者总数和分区总数进行整除运算来获得一个跨度，然后将分区按照跨度进行平均分配，
 保证分区尽可能均匀的分配给所有消费者。会将消费组内所有订阅了这个主题的消费者按照名称字典序排序，然后为每个消费者划分固定的分区范围，
 如果不够平均分配，靠前的消费者会被多分配一个分区
