@@ -38,9 +38,9 @@ Swoole µÄÐ­³Ìµ÷¶ÈÆ÷£¬´ó¼ÒÓ¦¸Ã¶¼ÖªµÀ°É¡£ÊÇÊôÓÚµ¥Ïß³ÌµÄ£¬²»´æÔÚÊý¾ÝÍ¬²½ÎÊÌâ£¬Í¬Ò»Ê
 
 Ð­³Ì´´½¨µÄÊ±ºòÐèÒªÒ»¸öÈ«ÐÂµÄÄÚ´æ¶Î×÷Îªc ºÍ php µÄÕ»£¬µ×²ãÄ¬ÈÏ·ÖÅä2M(c)ÐéÄâÄÚ´æ+8k(php)ÄÚ´æ£¬ÕâÊÇ¶ÔÓÚ php7.2+ °æ±¾¡£
 
-Õâ¸ö c Õ»Ö÷ÒªÓÃÓÚ±£´æµ×²ãº¯ÊýµÄµ÷ÓÃµÄ¾Ö²¿±äÁ¿Êý¾Ý£¬½â¾ö call_user_func¡¢array_map µÈ c º¯Êýµ÷ÓÃÔÚÐ­³ÌÇÐ»»Ê±Î´ÄÜ»¹Ô­ÎÊÌâ¡£
+¡¾Õâ¸ö c Õ»Ö÷ÒªÓÃÓÚ±£´æµ×²ãº¯ÊýµÄµ÷ÓÃµÄ¾Ö²¿±äÁ¿Êý¾Ý¡¿£¬½â¾ö call_user_func¡¢array_map µÈ c º¯Êýµ÷ÓÃÔÚÐ­³ÌÇÐ»»Ê±Î´ÄÜ»¹Ô­ÎÊÌâ¡£
 
-php Õ»Ö÷Òª±£´æº¯Êýµ÷ÓÃµÄ¾Ö²¿±äÁ¿Êý¾Ý£¬Ö÷ÒªÊÇzval½á¹¹Ìå£¬phpÖÐ±êÁ¿ÀàÐÍ(ÕûÐÍ£¬¸¡µã£¬²¼¶û£¬×Ö·û)ÕâÐ©ÊÇÖ±½Ó±£´æÔÚzval½á¹¹ÌåÄÚ£¬¶øÆäËüµÄ±äÁ¿ÀàÐÍÊÇÊ¹ÓÃÒýÓÃ¼ÆÊýÈ¥¹ÜÀíµÄ£¬ÔÚ¶ÑÉÏ´æ´¢¡£
+¡¾php Õ»Ö÷Òª±£´æº¯Êýµ÷ÓÃµÄ¾Ö²¿±äÁ¿Êý¾Ý¡¿£¬Ö÷ÒªÊÇzval½á¹¹Ìå£¬phpÖÐ±êÁ¿ÀàÐÍ(ÕûÐÍ£¬¸¡µã£¬²¼¶û£¬×Ö·û)ÕâÐ©ÊÇÖ±½Ó±£´æÔÚzval½á¹¹ÌåÄÚ£¬¶øÆäËüµÄ±äÁ¿ÀàÐÍÊÇÊ¹ÓÃÒýÓÃ¼ÆÊýÈ¥¹ÜÀíµÄ£¬ÔÚ¶ÑÉÏ´æ´¢¡£
 
 c Õ»ÇÐ»»Ê¹ÓÃÁË boost.context 1.60 »ã±à´úÂë£¬ÓÃÓÚ±£´æ¼Ä´æÆ÷£¬ÇÐ»»Ö¸ÁîÐòÁÐ£¬ÓÉ jump_fcontext Õâ¸ö ASM º¯ÊýÌá¹©¡£
 
