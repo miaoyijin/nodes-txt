@@ -14,3 +14,6 @@
 
 
 ###100-continue 去掉可以省掉一次RTT
+
+
+https://zhuanlan.zhihu.com/p/59656144
