@@ -1,0 +1,31 @@
+1)、mysql主从同步加速
+
+1、sync_binlog在slave端设置为0
+
+　　取值：0-N
+　　sync_binlog=0，當事務提交之后，MySQL不做fsync之類的磁盤同步指令刷新binlog_cache中的信息到磁盤，而讓Filesystem自行決定什么時候來做同步，或者cache滿了之后才同步到磁盤。這個是性能最好的。
+
+　　sync_binlog=1，當每進行1次事務提交之后，MySQL將進行一次fsync之類的磁盤同步指令來將binlog_cache中的數據強制寫入磁盤。不推薦使用，性能不好。
+
+　　sync_binlog=n，當每進行n次事務提交之后，MySQL將進行一次fsync之類的磁盤同步指令來將binlog_cache中的數據強制寫入磁盤。
+
+
+
+
+2、–logs-slave-updates 从服务器从主服务器接收到的更新不记入它的二进制日志。
+
+3、直接禁用slave端的binlog
+
+4、slave端，如果使用的存储引擎是innodb，innodb_flush_log_at_trx_commit =2
+
+    InnoDB引擎配置參數：innodb_flush_log_at_trx_commit
+
+
+　　innodb_flush_log_at_trx_commit：是 InnoDB 引擎特有的，ib_logfile的刷新方式（ ib_logfile：記錄的是redo log和undo log的信息）
+
+　　取值:0/1/2
+　　innodb_flush_log_at_trx_commit=0，表示每隔1秒把log buffer刷到文件系統中(os buffer)去，並且調用文件系統的“flush”操作將緩存刷新到磁盤上去。也就是說一秒之前的日志都保存在日志緩沖區，也就是內存上，如果機器宕掉，可能丟失1秒的事務數據。
+
+　　innodb_flush_log_at_trx_commit=1，表示在每次事務提交的時候，都把log buffer刷到文件系統中(os buffer)去，並且調用文件系統的“flush”操作將緩存刷新到磁盤上去。這樣的話，數據庫對IO的要求就非常高了，如果底層的硬件提供的IOPS比較差，那么MySQL數據庫的並發很快就會由於硬件IO的問題而無法提升。不推薦使用，性能不好。
+
+　　innodb_flush_log_at_trx_commit=2，表示在每次事務提交的時候會把log buffer刷到文件系統中去，但並不會立即刷寫到磁盤。如果只是MySQL數據庫掛掉了，由於文件系統沒有問題，那么對應的事務數據並沒有丟失。只有在數據庫所在的主機操作系統損壞或者突然掉電的情況下，數據庫的事務數據可能丟失1秒之類的事務數據。這樣的好處，減少了事務數據丟失的概率，而對底層硬件的IO要求也沒有那么高(log buffer寫到文件系統中，一般只是從log buffer的內存轉移的文件系統的內存緩存中，對底層IO沒有壓力)。
