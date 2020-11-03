@@ -1,0 +1,61 @@
+mysql复制历史
+
+MYSQL复制架构衍生史
+
+在2000年，MySQL 3.23.15版本引入了Replication。Replication作为一种准实时同步方式，得到广泛应用。
+这个时候的Replicaton的实现涉及到两个线程，一个在Master，一个在Slave。Slave的I/O和SQL功能是作为一个线程，
+从Master获取到event后直接apply，没有relay log。这种方式使得读取event的速度会被Slave replay速度拖慢，
+当主备存在较大延迟时候，会导致大量binary log没有备份到Slave端。
+
+
+在2002年，MySQL 4.0.2版本将Slave端event读取和执行独立成两个线程(IO线程和SQL线程)，同时引入了relay log。IO线程读取event后写入relay log，SQL线程从relay log中读取event然后执行。这样即使SQL线程执行慢，Master的binary log也会尽可能的同步到Slave。当Master宕机，切换到Slave，不会出现大量数据丢失
+
+
+
+MySQL 主从复制模式【rpl_semi_sync_master_wait_point=WAIT_AFTER_COMMIT|WAIT_AFTER_SYNC】
+
+
+一：l 异步模式（mysql async-mode）【默认模式】
+在2010年MySQL 5.5版本之前，一直采用的是这种异步复制的方式。主库的事务执行不会管备库的同步进度，如果备库落后，
+主库不幸crash，那么就会导致数据丢失。于是在MySQL在5.5中就顺其自然地引入了【半同步复制，
+主库在应答客户端提交的事务前需要保证至少一个从库接收并写到relay log中】
+
+
+【MySQL默认的复制即是异步的，主库在执行完客户端提交的事务后会立即将结果返给给客户端，并不关心从库是否已经接收并处理，这样就会有一个问题，主如果crash掉了，此时主上已经提交的事务可能并没有传到从上，如果此时，强行将从提升为主，可能导致新主上的数据不完整。】
+
+
+
+二： 半同步模式(mysql semi-sync)
+
+
+半同步复制:主库在应答客户端提交的事务前需要保证至少一个从库接收并写到relay log中
+
+
+三： 全同步模式
+
+
+
+四 ： MGR集群方案：强一致性
+
+
+1   MGR 原理
+
+【Group Replication由至少3个或更多个节点共同组成一个数据库集群，事务的提交必须经过半数以上节点同意方可提交，
+在集群中每个节点上都维护一个数据库状态机，保证节点间事务的一致性。Group Replication基于分布式一致性算法Paxos实现，
+允许部分节点故障，只要保证半数以上节点存活，就不影响对外提供数据库服务，是一个真正可用的高可用数据库集群技术】
+
+
+
+MySQL Group Replication 有两种模式，单主模式 single-primary mode 和多主模式 multi-primary mode ，在同一个 group 内，不允许两种模式同时存在，并且若要切换到不同模式，必须修改配置后重新启动集群。
+
+1.1   单主模式
+ 在单主模式下，只有一个节点可以读写，其他节点提供只读服务。单主模式下，该参数 _ 必须被设置为 FALSE ，当主节点宕掉，自动会根据服务器的 server_uuid 变量和 group_replication_member_weight 变量值，选择下一个 slave 谁作为主节点， group_replication_member_weight 的值最高的成员被选为新的主节点，该参数默认为 50 ，建议可以在节点上设置不同值；在 group_replication_member_weight 值相同的情况下， group 根据数据字典中 server_uuid 排序，排序在最前的被选择为主节点。
+
+单主模式中发现当前的主服务器，该值VARIABLE_VALUE 为实例节点的 server_uuid ：
+
+select * from performance_schema.global_status WHERE VARIABLE_NAME like '%group_replication%';
+
+
+
+1.2   多主模式
+。。。。。。。。。。。。。。。。。。。

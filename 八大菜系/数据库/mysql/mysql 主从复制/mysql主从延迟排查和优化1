@@ -1,6 +1,8 @@
-1)、mysql主从同步加速
+主从同步原理binlog 被复制成reday log
+然后从机器会复制relay log 做事务重演【redo log和binlog】，重做sql
 
-1、sync_binlog在slave端设置为0
+===============================================
+1、sync_binlog在【slave】端设置为0
 
 　　取值：0-N
 　　sync_binlog=0，當事務提交之后，MySQL不做fsync之類的磁盤同步指令刷新binlog_cache中的信息到磁盤，而讓Filesystem自行決定什么時候來做同步，或者cache滿了之后才同步到磁盤。這個是性能最好的。
@@ -16,7 +18,7 @@
 
 3、直接禁用slave端的binlog
 
-4、slave端，如果使用的存储引擎是innodb，innodb_flush_log_at_trx_commit =2
+4、【slave】端，如果使用的存储引擎是innodb，【innodb_flush_log_at_trx_commit】 =2
 
     InnoDB引擎配置參數：innodb_flush_log_at_trx_commit
 
