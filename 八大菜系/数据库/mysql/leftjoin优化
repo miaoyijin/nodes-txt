@@ -2,3 +2,18 @@
 1.当使用left join时，左表是驱动表，右表是被驱动表
 2.当使用right join时，右表时驱动表，左表是驱动表
 3.当使用join时，mysql会选择数据量比较小的表作为驱动表，大表作为被驱动表
+
+
+
+
+可以看到中间有个join buffer缓冲区，是将驱动表的所有join相关的列都先缓存到join buffer中，然后批量与匹配表进行匹配，
+将第一种多次比较合并为一次，降低了非驱动表（s）的访问频率。默认情况下join_buffer_size=256K，
+在查找的时候MySQL会将所有的需要的列缓存到join buffer当中，包括select的列，而不是仅仅只缓存关联列。
+在一个有N个JOIN关联的SQL当中会在执行时候分配N-1个join buffer
+
+
+* Join操作使用内存(join_buffer_size)：
+应用程序经常会出现一些两表（或多表）Join的操作需求，MySQL在完成某些Join需求的时候（all/index join），
+为了减少参与Join的“被驱动表”的读取次数以提高性能，需要使用到Join Buffer来协助完成Join操作
+（具体Join实现算法请参考：MySQL中的 Join 基本实现原理）。当Join Buffer太小，MySQL 不会将该Buffer存入磁盘文件，
+而是先将JoinBuffer中的结果集与需要Join的表进行Join操作，然后清空Join Buffer中的数据，
