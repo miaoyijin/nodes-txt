@@ -1,0 +1,9 @@
+ 找一含几千万数据的表， explain了一下or查询
+
+# id是主键， user_id是普通索引
+explain SELECT * from t WHERE id = 100000 or user_id = 'c7b6752c37b111e6a7d705b57e583e2e';
+id	select_type	table	type	possible_keys	key	key_len	ref	rows	Extra
+1	SIMPLE	t	index_merge	PRIMARY,t_userid	PRIMARY,t_userid	4,123	 	2	Using union(PRIMARY,t_userid);
+Type ： index_merge  表明使用了合并索引
+
+Extra ：Using union(PRIMARY,t_userid);  表明合并为index_merge 索引使用了 union 算法
