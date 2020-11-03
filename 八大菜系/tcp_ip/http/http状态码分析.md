@@ -8,5 +8,5 @@
 
 
 
-503：limit_conn,limit_req模块的实现比 limit_req 简单，直接对拥有相同变量值的连接进行计数，
+###503：limit_conn,limit_req模块的实现比 limit_req 简单，直接对拥有相同变量值的连接进行计数，
 超过限制的连接返回 503 错误(Service Temporarily Unavailable)。
