@@ -1,0 +1,17 @@
+1：composer 自动加载分为3种
+
+a): $files文件加载方式
+
+b)：classMap方式加载
+
+c)：psr4 加载
+
+d): psr0 加载
+
+
+2：composer 加载优化
+
+
+a)执行命令 composer dump-autoload -o （-o 等同于 --optimize）
+  原理：
+  这个命令的本质是将 PSR-4/PSR-0 的规则转化为了 classmap 的规则
