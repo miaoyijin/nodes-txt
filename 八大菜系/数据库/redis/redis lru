@@ -1,0 +1,8 @@
+
+noeviction:如果缓存数据超过了maxmemory限定值，并且客户端正在执行的命令(大部分的写入指令，但DEL和几个指令例外)会导致内存分配，
+则向客户端返回错误响应
+allkeys-lru: 对所有的键都采取LRU淘汰【首先从设置了过期时间的键集合中驱逐最久没有使用的】
+volatile-lru: 仅对设置了过期时间的键采取LRU淘汰
+allkeys-random: 随机回收所有的键
+volatile-random: 随机回收设置过期时间的键
+volatile-ttl: 仅淘汰设置了过期时间的键---淘汰生存时间TTL(Time To Live)更小的键
