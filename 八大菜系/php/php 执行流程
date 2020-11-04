@@ -1,0 +1,9 @@
+nginx   =>  fastcgi   => php-fpm master    => php worker
+
+
+{
+sapi  =>
+php层 【解析参数，加载扩展RINIT】
+=> zend引擎层【zend_vm: token->ast->op_array->op_code】
+=> 输出执行内存回收等工作
+}
