@@ -3,3 +3,6 @@
 2：redis hash一致性方案
 
 3：redis cluster 方案
+
+
+4：redis 实现原子性方案，单线程
