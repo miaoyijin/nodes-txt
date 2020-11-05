@@ -1,0 +1,34 @@
+我们首先将rabbit@rabbit2与rabbit@rabbit1一起加入集群。为此，在rabbit@rabbit2上，我们停止RabbitMQ应用程序并加入rabbit@rabbit1集群，然后重新启动RabbitMQ应用程序。请注意，必须先重置节点才能加入现有集群。重置节点将删除该节点上先前存在的所有资源和数据。这意味着节点不能同时成为集群的成员并且保留其现有数据。
+
+# on rabbit2
+rabbitmqctl stop_app
+# => Stopping node rabbit@rabbit2 ...done.
+
+rabbitmqctl reset
+# => Resetting node rabbit@rabbit2 ...
+
+rabbitmqctl join_cluster rabbit@rabbit1
+# => Clustering node rabbit@rabbit2 with [rabbit@rabbit1] ...done.
+
+rabbitmqctl start_app
+# => Starting node rabbit@rabbit2 ...done.
+通过在任一节点上运行cluster_status命令，可以看到两个节点已加入集群：
+
+# on rabbit1
+rabbitmqctl cluster_status
+# => Cluster status of node rabbit@rabbit1 ...
+# => [{nodes,[{disc,[rabbit@rabbit1,rabbit@rabbit2]}]},
+# =>  {running_nodes,[rabbit@rabbit2,rabbit@rabbit1]}]
+# => ...done.
+
+# on rabbit2
+rabbitmqctl cluster_status
+# => Cluster status of node rabbit@rabbit2 ...
+# => [{nodes,[{disc,[rabbit@rabbit1,rabbit@rabbit2]}]},
+# =>  {running_nodes,[rabbit@rabbit1,rabbit@rabbit2]}]
+# => ...done.
+现在，我们将rabbit@rabbit3加入同一集群。这些步骤与上面的步骤相同，除了这次我们将集群到rabbit2以证明选择集群的节点无关紧要-提供一个在线节点就足够了，并且该节点将集群到该集群。
+
+# on rabbit3
+rabbitmqctl stop_app
+# => Stopping node rabbit@rabbit3 ...done.
