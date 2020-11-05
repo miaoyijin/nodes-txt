@@ -15,7 +15,7 @@ mysql> show slave status \G;
                Relay_Log_Pos: 13456757
                Relay_Master_Log_File: mysql-bin.005152
                Slave_IO_Running: Yes
-              Slave_SQL_Running: Yes
+               Slave_SQL_Running: Yes
                Replicate_Do_DB:
                Replicate_Ignore_DB: mysql
                Replicate_Do_Table:
