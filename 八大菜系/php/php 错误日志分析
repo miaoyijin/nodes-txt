@@ -1,0 +1,5 @@
+ signal 11 ：非正常错误
+
+[05-Nov-2020 14:40:06] WARNING: [pool www] child 21106 exited on signal 11 (SIGSEGV) after 7793.884043 seconds from start
+
+signal 9 是自己主动退出达到了max_request
