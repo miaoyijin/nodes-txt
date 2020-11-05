@@ -2,8 +2,14 @@
 
 2：查看机器负载【io和网络和cpu情况，查看负载】
 
-3：设置从节点syn_binlog = 0 && innodb_flush_log_at_trx_commit = 2
+3: mysql查看是不是有慢查询【会记录update等慢日志】【slave执行某些语句耗时较长，如持有锁等】
 
-4: mysql查看是不是有慢查询【会记录update等慢日志】【slave执行某些语句耗时较长，如持有锁等】
+4：SHOW PROCESSLIST 查看从库进程目前的状态
 
-5：SHOW PROCESSLIST 查看从库进程目前的状态
+5：show slave status\G 【 Slave_IO_Running: Yes
+                          Slave_SQL_Running: Yes
+                          Seconds_Behind_Master
+
+                          】
+
+6：设置从节点syn_binlog = 0 && innodb_flush_log_at_trx_commit = 2
