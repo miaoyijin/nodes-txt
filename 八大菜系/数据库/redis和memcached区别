@@ -21,8 +21,8 @@ redis cluster 自动扩容
    而Redis的Hash结构可以使你像在数据库中Update一个属性一样只修改某一项属性值
    4. 并发修改同一数据，会出现问题
 
-   memcahed 缓存场景
-   1：token  2：session  3静态资源缓存。
+   memcahed 缓存场景[不需要持久化的业务可以适用]
+   1：token  2：session  3静态资源缓存  4：memcached 支持incr
 
 4：memcahed的核心数据结构是hashmap
 
