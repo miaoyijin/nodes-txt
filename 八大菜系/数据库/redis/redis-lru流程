@@ -2,6 +2,8 @@
  while (mem_freed < mem_tofree) {
     //循环释放直到满足需求内存
 
+    struct evictionPoolEntry *pool = EvictionPoolLRU;//每次申请一个pool
+
 
     ==> 获取bestkey
 
@@ -14,8 +16,12 @@
       //从redis evictionPool 中选择bestkey
        for (k = EVPOOL_SIZE-1; k >= 0; k--) {}
 
+            //删除bestkey
+            if (server.lazyfree_lazy_eviction)
+                dbAsyncDelete(db,keyobj);
+            else
+                dbSyncDelete(db,keyobj);
 
-      //删除dbAsyncDelete bestkey
 
       mem_freed++;
 
@@ -24,7 +30,7 @@
  }
 
 
- 2:evictionPoolPopulate 解析
+ 2:evictionPoolPopulate 解析,pool 内部是排序过的过期时间从大到小，应为循环删除，所以需要排序，方便从第一个开始
 evictionPoolPopulate()
 {
 
