@@ -71,3 +71,13 @@ if (server.maxmemory_policy & MAXMEMORY_FLAG_LRU) {
       EvictionPoolLRU = ep;
   }
 
+
+
+  所以缓存淘汰过程（根据lru策略分析）
+  1：服务初始化执行init调用evictionPoolAlloc 初始化lru pool （size = 16数组）
+  2：判断是否需要缓存淘汰策略
+  3：执行 freeMemoryIfNeeded
+  4：循环16个db，每个db选择maxmemory_samples个元素，根据idea（空闲时间）执行插入排序放入db lru pool中
+  5：删除lru pool中最末尾的元素
+  6：重复操作直到满足需求内存
+
