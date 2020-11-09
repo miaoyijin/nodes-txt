@@ -23,7 +23,7 @@ Fuzzy Checkpoint
 Sharp Checkpoint发生在数据库关闭时，将所有的脏页都刷新回磁盘，这是默认的工作方式，即参数：innodb_fast_shutdown=1。
 不适用于数据库运行时的刷新。
 
-在数据库运行时，InnoDB存储引擎内部采用Fuzzy Checkpoint，只刷新一部分脏页。
+在数据库运行时，InnoDB存储引擎内部采用Fuzzy Checkpoint，只刷新一部分脏页。【以每秒或每十秒的速度从缓冲池的脏页列表中刷新一定比例的页回磁盘】
 】
 
 3: checkpoint解决的问题：
