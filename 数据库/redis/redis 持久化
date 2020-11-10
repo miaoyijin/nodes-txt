@@ -1,7 +1,7 @@
 持久化机制：RDB,AOF，（4.0之后增加，所以AOF重写方式也不一样需要配置aof-use-rdb-preamble开启）混合持久化
 
 
-【重点：aof-use-rdb-preamble 需要开启 auto-aof-rewrite-percentage】
+【重点：aof-use-rdb-preamble 需要开启 appendonly和auto-aof-rewrite-percentage】
 
 
 AOF持久化介绍：
