@@ -17,3 +17,11 @@
 为了减少参与Join的“被驱动表”的读取次数以提高性能，需要使用到Join Buffer来协助完成Join操作
 （具体Join实现算法请参考：MySQL中的 Join 基本实现原理）。当Join Buffer太小，MySQL 不会将该Buffer存入磁盘文件，
 而是先将JoinBuffer中的结果集与需要Join的表进行Join操作，然后清空Join Buffer中的数据，
+
+
+left join和in查询的问题分析
+
+1：当有索引的时需要可能就具体的执行分析
+
+
+2：当没有索引时，left join是采用了Block Nested-Loop Join 算法，性能较好。
