@@ -1,9 +1,11 @@
 大量time_Wait 的危害
 【在高并发短连接的TCP服务器上，当服务器处理完请求后主动请求关闭连接，这样服务器上会有大量的连接处于TIME_WAIT状态，服务器维护每一个连接需要一个socket，也就是每个连接会占用一个文件描述符，而文件描述符的使用是有上限的，如果持续高并发，会导致一些连接失败】
 
+【只有主动关闭的一方才会进入TIME_WAIT状态，那这种情况也就是高并发连接都是服务端主动关闭。那么端口不够用就是文件描述符不够用了，因为文件描述符只有在从TIME_WAIT状态转换到CLOSE状态后才会真正被系统收回】
+
 net.ipv4.tcp_syncookies = 1 表示开启SYN Cookies。当出现SYN等待队列溢出时，启用cookies来处理，可防范少量SYN攻击，默认为0，表示关闭；
-net.ipv4.tcp_tw_reuse = 1 表示开启重用（客户端设置）。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；
-net.ipv4.tcp_tw_recycle = 1 表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。
+net.ipv4.tcp_tw_reuse = 1 表示开启重用（客户端设置需要配合net.ipv4.tcp_timestamps）。允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭；
+net.ipv4.tcp_tw_recycle = 1 （PAWS技术;需要配合开启net.ipv4.tcp_timestamps，Linux 从4.12内核版本开始移除了 tcp_tw_recycle 配置）表示开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。
 net.ipv4.tcp_fin_timeout =  修改系统默认的 TIMEOUT 时间
 net.ipv4.tcp_max_tw_buckets = 5000 表示系统同时保持TIME_WAIT套接字的最大数量，(默认是18000). 当TIME_WAIT连接数量达到给定的值时，所有的TIME_WAIT连接会被立刻清除，并打印警告信息。但这种粗暴的清理掉所有的连接，意味着有些连接并没有成功等待2MSL，就会造成通讯异常。一般不建议调整
 net.ipv4.tcp_timestamps = 1(默认即为1)60s内同一源ip主机的socket connect请求中的timestamp必须是递增的。也就是说服务器打开了 tcp_tw_reccycle了，就会检查时间戳，如果对方发来的包的时间戳是乱跳的或者说时间戳是滞后的，那么服务器就会丢掉不回包，现在很多公司都用LVS做负载均衡，通常是前面一台LVS，后面多台后端服务器，这其实就是NAT，当请求到达LVS后，它修改地址数据后便转发给后端服务器，但不会修改时间戳数据，对于后端服务器来说，请求的源地址就是LVS的地址，加上端口会复用，所以从后端服务器的角度看，原本不同客户端的请求经过LVS的转发，就可能会被认为是同一个连接，加之不同客户端的时间可能不一致，所以就会出现时间戳错乱的现象，于是后面的数据包就被丢弃了，具体的表现通常是是客户端明明发送的SYN，但服务端就是不响应ACK，还可以通过下面命令来确认数据包不断被丢弃的现象，所以根据情况使用
