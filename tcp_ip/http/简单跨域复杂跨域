@@ -1,0 +1,16 @@
+同源策略（Same origin policy）
+
+一个简单的请求大致如下：
+HTTP方法是下列之一HEAD
+GET
+POST
+HTTP头信息不超出以下几种字段
+Accept
+Accept-Language
+Content-Type，
+但仅能是下列之一application/x-www-form-urlencoded
+multipart/form-data
+text/plain任何一个不满足上述要求的请求，即被认为是复杂请求。
+
+一个复杂请求不仅有：包含通信内容的请求，同时也包含预请求
+
