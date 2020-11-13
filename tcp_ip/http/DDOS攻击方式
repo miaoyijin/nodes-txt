@@ -1,4 +1,8 @@
-1：SYN Flood 半链接攻击  预防方式，防火墙+syn_cookie
+洪水攻击方式：阿拉丁洪水攻击器，局域网ARP攻击，以及ddos攻击；
+
+ddos 攻击分为以下类型：
+
+1：SYN Flood 半链接攻击：预防方式：防火墙+syn_cookie
 
 2：tcp 全链接攻击
 
