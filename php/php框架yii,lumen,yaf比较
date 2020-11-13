@@ -1,0 +1,5 @@
+yaf框架基于C扩展包括Appliction,request,response,config,route 这些模块个满足基本需求，文档和相关辅助功能太少，比如orm,redis，log，这些。
+
+lumen:框架本身加载慢，但是可以开启opcode,有完整的项目模板,支持AOP编程【中间件】，提供服务注册等功能,生态良好，基本功能都有，学习成本低，开发效率高
+
+yii：

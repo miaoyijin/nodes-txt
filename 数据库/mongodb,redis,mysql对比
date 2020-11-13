@@ -1,0 +1,46 @@
+mongodb和redis和mysql的区别
+
+1:设计理念不一样，mongodb 有库表的概念(
+弱事务数据，
+文本型业务数据，
+对安全性要求不高的，
+数据格式经常变动的数据，
+或是有数据量较大的业务：如新闻,统计报表,小说文章等
+)，
+
+
+2：mysql复杂的业务需求，需要事务支持，数据安全性高【mysql是一个单进程多线程的数据库】
+
+
+3： redis没有这种库表的强概念(市场是高并发读写业务)
+这是最本质区别
+
+
+
+mongodb引擎历史WiredTiger和MMAPv1从【MongoDB 3.2 版本开始，WiredTiger成为MongDB默认的Storage Engine】
+
+Journal是 MongoDB 存储引擎层的概念，目前 MongoDB主要支持 mmapv1、wiredtiger、mongorocks 等存储引擎，都支持配置Journal。
+
+Journal刷新机制: 默认情况下mongodb每100毫秒由journal buffer 往journal文件中flush一次数据，不过这是在数据文件和journal文件处于同一磁盘卷上的情况，而如果数据文件和journal文件不在同一磁盘卷上时，默认刷新输出时间是30毫秒。不过这个毫秒值是可以修改的，可修改范围是2~300，值越低，刷新输出频率越高，数据安全度也就越高，但磁盘性能上的开销也更高
+【journalCommitInterval=100】
+
+
+
+MMAPv1：mmap 内存映射技术，在 MongoDB 发展的早期，并没有存储引擎的概念，文档的存储使用一种简单的基于 mmap 的存储管理机制，到 MongoDB 3.0，MongoDB 引入 WiredTiger 后，有了多存储引擎的支持，原来的存储机制也抽象为 mmapv1 存储引擎，并作为 默认的存储引擎。
+
+使用MMAPv1存储引擎，每个数据库由【一个.ns文件】和一个或多个数据文件组成，假设数据库名称为mydb，则.ns文件名称为mydb.ns，
+数据文件名称为：mydb.0，mydb.1，mydb.2....，文件编号从0开始，文件大小从64MB开始，依次倍增，最大为2GB
+
+mmap 的数据结构：每个数据库包含一个.ns文件和若干数据文件，结构如下：
+.ns =>namespace( mydb.0 文件) =》Extent  =>recoed 结构
+
+
+
+
+
+WiredTiger提供文档级别（Document-Level）的并发控制，检查点（CheckPoint【mmap 适合大批量数据更新并保存，读多写少，频繁mmap磁盘负载高】），数据压缩和本地数据加密（ Native Encryption）等功能
+Wiredtiger采用Copy on write的方式管理修改操作（insert、update、delete），修改操作会先缓存在cache里，持久化时，修改操作不会在原来的leaf page上进行，而是写入新分配的page，每次checkpoint都会产生一个新的root page
+
+
+
+
