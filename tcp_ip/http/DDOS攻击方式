@@ -1,4 +1,4 @@
-1：SYN Flood 半链接攻击
+1：SYN Flood 半链接攻击  预防方式，防火墙+syn_cookie
 
 2：tcp 全链接攻击
 
