@@ -1,6 +1,40 @@
-1：SYN Flood 半链接攻击
+常见的网络攻击模式：
+
+
+一：洪水攻击方式：阿拉丁洪水攻击器，局域网ARP攻击，以及ddos攻击；
+
+
+
+二：SQL注入
+
+
+三：xss
+
+
+四：跨站请求伪造csrf
+
+
+
+
+ddos 攻击分为以下类型：
+
+1：SYN Flood 半链接攻击：预防方式：防火墙+syn_cookie;tcp_retries1;
 
 2：tcp 全链接攻击
 
+TCP_DEFER_ACCEPT的超时设置
 
-3：http攻击
+在第三次握手时候，如果客户段迟迟不发送数据，服务器 连接将一直处于syn_recv状态。
+此时内核会重传 syn_ack ，重传的次数可以通过 sysctl -w net.ipv4.tcp_synack_retries=3来设置，
+如果3次重传后，客户端依然没有数据，在等待 设置TCP_DEFER_ACCEPT时候指定的超时时间后（这个时间单位为s
+，可是测试看来并不精准的执行），系统将回收连接，并不对客户端发出rst或者fin包。
+
+nginx 设置listen 80 default deferred;
+
+
+
+
+3：http攻击（HTTP Flood 俗称CC攻击）
+
+限流+缓存
+

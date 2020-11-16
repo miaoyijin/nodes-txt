@@ -1,0 +1,16 @@
+kafka 就是一般的MQ架构，通信协议基于tcp的二进制
+
+kafka包括如下结构：
+Producer
+Topic
+Broker【由分区组成Partition】
+Consumer【消费组】
+zk 管理配置，主体，分区，offset 等消息。
+组成
+
+发消息流程：
+Producer 根据轮训负载发送消息到Partition
+
+kafka 收到消息定时持久化到文件
+
+Consumer 根据负载均衡策略去拉取消息并消费，同时上报offset。
