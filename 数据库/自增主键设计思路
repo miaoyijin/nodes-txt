@@ -1,0 +1,38 @@
+1：mysql单实例自增主键
+
+CREATE DATABASE `SEQID`;
+
+CREATE TABLE SEQID.SEQUENCE_ID (
+	id bigint(20) unsigned NOT NULL auto_increment,
+	stub char(10) NOT NULL default '',
+	PRIMARY KEY (id),
+	UNIQUE KEY stub (stub)
+) ENGINE=MyISAM;
+
+begin;
+replace into SEQUENCE_ID (stub) VALUES ('anyword');
+select last_insert_id();
+commit;
+
+
+2：mysql 分布式自增主键
+
+n台分布式实例，可以设置自增步长
+
+
+通过接口调用获取自增主键
+
+
+3：redis自增主键【脚本读写mysql负责生成idkey，并且】
+        脚本：1：先写mysql，确认此批次的key范围，循环写入redis list（也可以分布式写入redis）
+        可以批量push，增加性能。【redis 持久化也是一个疼点问题，可以关闭】
+
+
+
+
+
+4：号段模式（和以上3类似）
+
+比如DistributIdService每次从数据库获取ID时，就获取一个号段，比如(1,1000]，这个范围表示了1000个ID，
+业务应用在请求DistributIdService提供ID时，DistributIdService只需要在本地从1开始自增并返回即可，
+而不需要每次都请求数据库，一直到本地自增到1000时，也就是当前号段已经被用完时，才去数据库重新获取下一号段。

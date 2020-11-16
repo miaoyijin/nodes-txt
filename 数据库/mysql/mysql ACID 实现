@@ -1,0 +1,16 @@
+A 原子信：
+
+undo + redo log
+
+
+
+C一致性： redo log +binlog 两阶段提交实现
+
+
+
+I 事务隔离实现（mvcc）： undo + 锁
+
+
+D：持久 redo log 和 binlog
+
+
