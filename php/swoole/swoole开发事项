@@ -1,0 +1,8 @@
+一：不要在代码中执行sleep以及其他睡眠函数，这样会导致整个进程阻塞
+二：exit/die是危险的，会导致Worker进程退出
+三：可通过register_shutdown_function来捕获致命错误，在进程异常退出时做一些清理工作，具体参考 /wiki/page/305.html
+四：PHP代码中如果有异常抛出，必须在回调函数中进行try/catch捕获异常，否则会导致工作进程退出
+五：不支持set_exception_handler，必须使用try/catch方式处理异常
+
+Worker进程不得共用同一个Redis或MySQL等网络服务客户端，
+Redis/MySQL创建连接的相关代码可以放到onWorkerStart回调函数中
