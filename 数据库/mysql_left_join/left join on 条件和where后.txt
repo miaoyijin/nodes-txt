@@ -1,0 +1,25 @@
+关于left join 驱动表的选择：
+1：当连接查询没有where条件时，左连接查询时，前面的表是驱动表，后面的表是被驱动表，
+右连接查询时相反，内连接查询时，哪张表的数据较少，哪张表就是驱动表
+
+2：当连接查询有where条件时，带where条件的表是驱动表，否则是被驱动表
+
+
+explain select * from test a left join test2 a2 on a.name = a2.name2 where a2.age2 = '111'
+a2 是驱动表
+
+
+
+ explain select * from test a left join test2 a2 on a.name = a2.name2
+ a是驱动表
+
+a2 显示： Using join buffer (Block Nested Loop)
+
+
+left join on and     和 left join on where
+
+
+select * from test a left join test2 a2 on a.name = a2.name2  and a2.name2 ='11'
+有三条数据
+
+select * from test a left join test2 a2 on a.name = a2.name2  where  a2.name2 ='11' 一条都没
