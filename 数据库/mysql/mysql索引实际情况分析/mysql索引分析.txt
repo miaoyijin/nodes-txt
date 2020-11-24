@@ -1,0 +1,54 @@
+【left join 情况分析】
+test2 6条数据，test 2条数据
+
+1:explain select * from test2 a left join test b on  a.name2 = b.name  都是全表扫描，a表test2是驱动表
+
+
+
+2：explain select * from test a left join test2 b on  a.name = b.name2 where b.age2 >5;
+如果b.age2没有索引则a表作为驱动表
+
+3:explain select * from test a left join test2 b on  a.name = b.name2 where b.name2 = '1'
+
+如果b.name2 有索引则是b为驱动表
+
+
+
+【index_merge】分析
+
+我们的 where 中可能有多个条件(或者join)涉及到多个字段，它们之间进行 AND 或者 OR，那么此时就有可能会使用到 index merge 技术。
+index merge 技术如果简单的说，其实就是：对多个索引分别进行条件扫描，然后将它们各自的结果进行合并(intersect/union)
+查看图片index_merge.png
+
+
+
+【use index;use where;Using index condition】分析如下
+
+【use index 覆盖索引】
+
+查询的列被索引覆盖，并且where筛选条件是索引的是前导列，Extra中为Using index
+
+
+【Using where】
+1：全表扫描
+2：查询的列未被索引覆盖，where筛选条件非索引的前导列，Extra中为Using where（全表扫描）
+
+【use where;use index】
+查询的列被索引覆盖，并且where筛选条件是索引列之一但是不是索引的不是前导列，Extra中为Using where; Using index
+
+
+【 Using index condition】
+
+1：查询的列不全在索引中，where条件中是一个前导列的范围【命中索引】
+2：查询列不完全被索引覆盖，查询条件完全可以使用到索引（进行索引查找）
+
+
+
+
+
+
+
+
+
+
+
