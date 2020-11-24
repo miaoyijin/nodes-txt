@@ -1,0 +1,7 @@
+其实where 查询方式其实就是inner join
+
+其实where也会嵌套循环
+explain select * from test a, test2 b where a.age = b.age2
+
+
+Using where; Using join buffer (Block Nested Loop)
