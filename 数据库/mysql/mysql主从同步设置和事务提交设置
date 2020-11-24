@@ -1,0 +1,6 @@
+MySQL 主从复制模式【rpl_semi_sync_master_wait_point=WAIT_AFTER_COMMIT|WAIT_AFTER_SYNC】
+
+异步，半同步，全同步
+
+
+sync_binlog 线上主设置成1，从设置0，innodb_flush_log_at_trx_commit 设置成1
