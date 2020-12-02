@@ -1,3 +1,7 @@
+redis cluster 解决什么问题
+
+
+缺点：
 1:【 Client 實現複雜，驅動要求實現 Smart Client，緩存 slots mapping 信息並及時更新，提高了開發難度，客戶端的不成熟影響業務的穩定性。目前僅 JedisCluster 相對成熟，異常處理部分還不完善，比如常見的「max redirect exception」。】
 
 2: 節點會因為某些原因發生阻塞(阻塞時間大於 clutser-node-timeout)，被判斷下線，這種 failover 是沒有必要的。
