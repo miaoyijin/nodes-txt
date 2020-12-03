@@ -14,9 +14,9 @@ eg: SELECT user_redis_key  FROM user WHERE user_redis_key > 'user#86109904337129
 
 
 
-6: like '1111' 和 = 的区别在哪
+6: like '1111' 和 = 的区别在哪索引 ??? type区别
 情况如下:
 EXPLAIN SELECT user_redis_key  FROM user WHERE user_redis_key  like 'user#861099043371293#1589543960'
-extra = 'Using where; Using index'
+extra = 'Using where; Using index'  type = 'range'
 EXPLAIN SELECT user_redis_key  FROM user WHERE user_redis_key = 'user#861099043371293#1589543960'
-extra = 'Using index'
+extra = 'Using index'  type = 'const'
