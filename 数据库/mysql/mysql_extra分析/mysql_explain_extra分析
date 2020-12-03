@@ -1,0 +1,22 @@
+1: Using where：表示优化器需要通过索引回表查询数据；
+
+2: Using index：表示直接访问索引就足够获取到所需要的数据，不需要通过索引回表；
+eg：SELECT user_redis_key  FROM user WHERE user_redis_key = 'user#861099043371293#1589543960'
+
+3: Using index condition：在5.6版本后加入的新特性（Index Condition Pushdown）;
+ Using index condition 会先条件过滤索引，过滤完索引后找到所有符合索引条件的数据行，随后用 WHERE 子句中的其他条件去过滤这些数据行；
+ 【查询条件都在索引内】
+
+4:Using index condition; Using where先使用索引在回表查询
+
+5：Using where; Using index： 表示用到了索引覆盖，且对索引做了where筛选
+eg: SELECT user_redis_key  FROM user WHERE user_redis_key > 'user#861099043371293#1589543960%'
+
+
+
+6: like '1111' 和 = 的区别在哪
+情况如下:
+EXPLAIN SELECT user_redis_key  FROM user WHERE user_redis_key  like 'user#861099043371293#1589543960'
+extra = 'Using where; Using index'
+EXPLAIN SELECT user_redis_key  FROM user WHERE user_redis_key = 'user#861099043371293#1589543960'
+extra = 'Using index'
