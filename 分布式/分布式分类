@@ -11,5 +11,8 @@
 常见分布式系统：
 hbase，hadoop，redis等
 
+常见分布式架构：
+c/s；b/s；主从，hash一致性，微服务；还需要根据具体的应用去区分，比如MGR，redis cluster 等
+
 分布式算法：
 Paxos、Raft
