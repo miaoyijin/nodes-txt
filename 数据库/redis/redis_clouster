@@ -1,0 +1,21 @@
+redis cluster 解决什么问题
+
+
+缺点：
+1:【 Client 實現複雜，驅動要求實現 Smart Client，緩存 slots mapping 信息並及時更新，提高了開發難度，客戶端的不成熟影響業務的穩定性。目前僅 JedisCluster 相對成熟，異常處理部分還不完善，比如常見的「max redirect exception」。】
+
+2: 節點會因為某些原因發生阻塞(阻塞時間大於 clutser-node-timeout)，被判斷下線，這種 failover 是沒有必要的。
+
+數據通過異步複製，不保證數據的強一致性。
+
+3：多個業務使用同一套集群時，無法根據統計區分冷熱數據，資源隔離性較差，容易出現相互影響的情況。
+
+4：【Slave 在集群中充當「冷備」，不能緩解讀壓力，當然可以通過 SDK 的合理設計來提高 Slave 資源的利用率。】
+
+5： 【Key 批量操作限制，如使用 mset、mget 目前只支持具有相同 slot 值的 Key 執行批量操作。對於映射為不同 slot 值的 Key 由於 Keys 不支持跨 slot 查詢，所以執行 mset、mget、sunion 等操作支持不友好。】
+
+6：【Key 事務操作支持有限，只支持多 key 在同一節點上的事務操作，當多個 Key 分佈於不同的節點上時無法使用事務功能。】
+
+
+
+7：【不支持多數據庫空間，單機下的 redis 可以支持到 16 個數據庫，集群模式下只能使用 1 個數據庫空間，即 db 0。】
