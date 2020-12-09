@@ -24,6 +24,8 @@ ini_set('display_errors', 'on');
 //5:在发送数据时，是从用户态数据到内核态
 
 //6:tcpdump查看的是TCP ,UDP数据包的传输，其实在ip层UDP,TCp也会分片传输，当UDP，TCP数据包大于MTU时即会IP分片
+
+//7：其实这里ip分片可以看成一个更小的udp包,当遇到更小的MTU又被分成更小的IP分片
 function udpGet($sendMsg = '', $ip = '115.238.192.243', $port = '9998'){
     $handle = stream_socket_client("udp://{$ip}:{$port}", $errno, $errstr);
     if( !$handle ){
