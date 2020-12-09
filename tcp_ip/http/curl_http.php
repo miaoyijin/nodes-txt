@@ -24,7 +24,8 @@ function HTTP_Post($URL,$data, $referrer="") {
     $request.="Host: ".$URL_Info["host"]."\r\n";
     $request.="Content-type: application/x-www-form-urlencoded\r\n";
     $request.="Connection: close\r\n";
-    $request.="\r\n\r\n";
+    //var_dump(file_get_contents('D:/www/wpimages/www/github/nodes-txt/tcp_ip/http/udp_file_test'));exit;
+    $request.="\r\n" . file_get_contents('D:/www/wpimages/www/github/nodes-txt/tcp_ip/http/udp_file_test') . "\r\n";
     $fp = fsockopen($URL_Info["host"],$URL_Info["port"]);
     fputs($fp, $request);
     fputs($fp, $request);
