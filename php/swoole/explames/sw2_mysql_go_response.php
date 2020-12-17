@@ -41,6 +41,7 @@ $http->start();
  */
 function mysqldeal($response)
 {
+    //協程和異步是一樣的
     $db = new swoole_mysql();
     $server = array(
         'host' => 'proverb-mysql-g1-master001.a.2345inc.com',
