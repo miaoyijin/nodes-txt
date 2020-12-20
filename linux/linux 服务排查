@@ -1,0 +1,14 @@
+负载计算方式：
+当 load averages 首次出现在 Linux 中时，就像其他操作系统一样，它们反映了 CPU 的需求。
+但后来在 Linux 上将它们改为不仅包括 runnable 任务，还包括处于不间断状态的任务
+（TASK_UNINTERRUPTIBLE 或 nr_uninterruptible）。希望避免信号中断的 code path
+会使用该状态，其中包括磁盘 I/O 上阻塞的任务和一些锁。你可能之前已经看到过这种状态：
+它 ps 和 top 中显示为 “D” 状态。ps(1) 手册将其称为 “uninterruptible sleep (usually IO)”。
+
+在系统中增加不间断状态意味着 Linux load averages 可能会因为磁盘（或 NFS）I/O 负载而增加，而不仅仅是 CPU 需求，对于熟悉其他操作系统及其 CPU load averages 的每个人来说，包含这种状态起初都是令人困惑的
+【D 网络和磁盘】
+
+
+1：经过测试top:wa和网络没有太大关系
+2:vmstat的io也包括网络io
+3:vmstat 的wa只和磁盘有关
