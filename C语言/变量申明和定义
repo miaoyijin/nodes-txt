@@ -1,0 +1,60 @@
+一： 声明与定义（Declaration and Definition）
+
+开始这篇文章之前，我们先弄懂变量的declaration和definition的区别，即变量的声明和定义的区别。
+
+一般情况下，我们这样简单的分辨声明与定义的区别：建立存储空间的声明称之为“定义”，而把不需要建立存储空间的称之为“声明”。
+
+其实更为准确地描述的话，变量的声明可以分为两种情况：
+
+（1）一种是需要建立存储空间的。例如：int a;在声明的时候就已经建立了存储空间。这种声明是定义性声明（defining declaration）。即我们平时所说的“定义”；
+
+（2）另一种是不需要建立存储空间的，只是告诉编译器某变量已经在别处定义过了。例如：extern int a;其中，变量a是在别处定义的。这种声明是引用性声明（referning declaration）。即我们平时所说的“声明”。
+
+所以，从广义的角度来说，声明中包含着定义，但是并非所有的声明都是定义。即，定义性声明既是定义又是声明，而引用性声明只是声明。例如，int a;它既是定义又是声明，而extern int a;就只是声明而不是定义。再来看具体的例子
+
+前置申明：
+
+
+#ifndef __POINT_H__
+#define __POINT_H__
+// point.h
+//#include "circle.h"
+
+struct circle;
+struct coordinate {
+    struct circle *cir;
+};
+
+
+
+常量指针：表示const修饰的为所申明的类型。
+例如：
+
+//注意char const *p与const char *p效果相同。
+void consttest(const char *p)
+{
+    printf("p[1]=%c\n",p[1]);
+    p=1;//正确
+    *(p+1)='a';//错误
+}
+1
+2
+3
+4
+5
+6
+7
+因为const修饰的是char，所以就是说：p所指向的内存地址所对应的值，是const，因此不可修改。但指针所指向的内存地址是可以修改的，因为其并不是const类型。
+
+指针常量：表示const修改的指针。
+
+例如：
+
+void testconst(char *const p)
+{
+    char *tmp="13213";
+    p=1;;//错误
+    p=tmp;;//错误
+    p[1]='a';//正确
+    *(p+1)='a';//正确
+}
