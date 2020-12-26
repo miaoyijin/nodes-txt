@@ -1,0 +1,41 @@
+at most once:
+When the acks property is set to zero you get at most once delivery semantics.
+Kafka producer sends the record to the broker and doesn't wait for any response.
+Messages, once sent, will not be retried in this setting. The producer uses the
+ “send and forget approach” with acks = 0.
+
+
+ at least once:
+ When this property is set to 1 you can achieve at least once delivery semantics. A Kafka producer sends the record to the broker and waits for a response from the broker. If no acknowledgment is received for the message sent, then the producer will retry sending the messages based on a retry configuration. The retries property, by default, is set to 0; make sure this is set to the desired number or Max.INT.
+
+
+ exactly once:
+
+ Kafka 事务性最开始的出发点是为了在 Kafka Streams 中实现 Exactly-Once 语义的数据处理
+
+
+ Properties props = new Properties();
+ props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+ props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+ props.put("client.id", "ProducerTranscationnalExample");
+ props.put("bootstrap.servers", "localhost:9092");
+ props.put("transactional.id", "test-transactional");
+ props.put("acks", "all");//设置
+ KafkaProducer producer = new KafkaProducer(props);
+ producer.initTransactions();
+
+ try {
+     String msg = "matt test";
+     producer.beginTransaction();
+     producer.send(new ProducerRecord(topic, "0", msg.toString()));
+     producer.send(new ProducerRecord(topic, "1", msg.toString()));
+     producer.send(new ProducerRecord(topic, "2", msg.toString()));
+     producer.commitTransaction();
+ } catch (ProducerFencedException e1) {
+     e1.printStackTrace();
+     producer.close();
+ } catch (KafkaException e2) {
+     e2.printStackTrace();
+     producer.abortTransaction();
+ }
+ producer.close();
