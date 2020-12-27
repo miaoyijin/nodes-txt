@@ -11,4 +11,14 @@
 领域驱动，模型驱动，数据驱动，属性驱动
 
 
+3：数据驱动模型设计有：贫血模型（Anemic Domain Model）
+
+
+4：充血模式（Rich Domain Model）：ddd
+
+
+基于充血模型的DDD架构： 基于充血模型的DDD开发模式也是按照MVC三层架构分层的，与基于贫血模型的开发模式主要区别在Service层。
+Domain就相当于贫血模型中的BO，不过Domain既包含数据，也包含业务逻辑，而Service类就变的非常单薄，轻Service重Domain
+
+
 
