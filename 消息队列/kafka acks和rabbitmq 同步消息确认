@@ -11,9 +11,17 @@ Messages, once sent, will not be retried in this setting. The producer uses the
 
  exactly once:
 
+/**
+Kafka事务机制的实现主要是为了支持
+Exactly Once即正好一次语义
+操作的原子性
+有状态操作的可恢复性
+*/
+
  Kafka 事务性最开始的出发点是为了在 Kafka Streams 中实现 Exactly-Once 语义的数据处理
 
 
+//例子如下：
  Properties props = new Properties();
  props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
  props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
@@ -39,3 +47,6 @@ Messages, once sent, will not be retried in this setting. The producer uses the
      producer.abortTransaction();
  }
  producer.close();
+
+
+
