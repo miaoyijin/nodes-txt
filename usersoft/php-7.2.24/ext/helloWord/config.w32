@@ -1,0 +1,13 @@
+// $Id$
+// vim:ft=javascript
+
+// If your extension references something external, use ARG_WITH
+// ARG_WITH("helloWord", "for helloWord support", "no");
+
+// Otherwise, use ARG_ENABLE
+ARG_ENABLE("helloWord", "enable helloWord support", "no");
+
+if (PHP_HELLOWORD != "no") {
+	EXTENSION("helloWord", "helloWord.c", PHP_EXTNAME_SHARED, "/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1");
+}
+

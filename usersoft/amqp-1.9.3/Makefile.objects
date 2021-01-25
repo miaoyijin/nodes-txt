@@ -1,0 +1,30 @@
+amqp.lo: /opt/case/usersoft/amqp-1.9.3/amqp.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/opt/case/usersoft/amqp-1.9.3 $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /opt/case/usersoft/amqp-1.9.3/amqp.c -o amqp.lo 
+amqp_type.lo: /opt/case/usersoft/amqp-1.9.3/amqp_type.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/opt/case/usersoft/amqp-1.9.3 $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /opt/case/usersoft/amqp-1.9.3/amqp_type.c -o amqp_type.lo 
+amqp_exchange.lo: /opt/case/usersoft/amqp-1.9.3/amqp_exchange.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/opt/case/usersoft/amqp-1.9.3 $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /opt/case/usersoft/amqp-1.9.3/amqp_exchange.c -o amqp_exchange.lo 
+amqp_queue.lo: /opt/case/usersoft/amqp-1.9.3/amqp_queue.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/opt/case/usersoft/amqp-1.9.3 $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /opt/case/usersoft/amqp-1.9.3/amqp_queue.c -o amqp_queue.lo 
+amqp_connection.lo: /opt/case/usersoft/amqp-1.9.3/amqp_connection.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/opt/case/usersoft/amqp-1.9.3 $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /opt/case/usersoft/amqp-1.9.3/amqp_connection.c -o amqp_connection.lo 
+amqp_connection_resource.lo: /opt/case/usersoft/amqp-1.9.3/amqp_connection_resource.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/opt/case/usersoft/amqp-1.9.3 $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /opt/case/usersoft/amqp-1.9.3/amqp_connection_resource.c -o amqp_connection_resource.lo 
+amqp_channel.lo: /opt/case/usersoft/amqp-1.9.3/amqp_channel.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/opt/case/usersoft/amqp-1.9.3 $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /opt/case/usersoft/amqp-1.9.3/amqp_channel.c -o amqp_channel.lo 
+amqp_envelope.lo: /opt/case/usersoft/amqp-1.9.3/amqp_envelope.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/opt/case/usersoft/amqp-1.9.3 $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /opt/case/usersoft/amqp-1.9.3/amqp_envelope.c -o amqp_envelope.lo 
+amqp_basic_properties.lo: /opt/case/usersoft/amqp-1.9.3/amqp_basic_properties.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/opt/case/usersoft/amqp-1.9.3 $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /opt/case/usersoft/amqp-1.9.3/amqp_basic_properties.c -o amqp_basic_properties.lo 
+amqp_methods_handling.lo: /opt/case/usersoft/amqp-1.9.3/amqp_methods_handling.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/opt/case/usersoft/amqp-1.9.3 $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /opt/case/usersoft/amqp-1.9.3/amqp_methods_handling.c -o amqp_methods_handling.lo 
+amqp_timestamp.lo: /opt/case/usersoft/amqp-1.9.3/amqp_timestamp.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/opt/case/usersoft/amqp-1.9.3 $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /opt/case/usersoft/amqp-1.9.3/amqp_timestamp.c -o amqp_timestamp.lo 
+amqp_decimal.lo: /opt/case/usersoft/amqp-1.9.3/amqp_decimal.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/opt/case/usersoft/amqp-1.9.3 $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /opt/case/usersoft/amqp-1.9.3/amqp_decimal.c -o amqp_decimal.lo 
+$(phplibdir)/amqp.la: ./amqp.la
+	$(LIBTOOL) --mode=install cp ./amqp.la $(phplibdir)
+
+./amqp.la: $(shared_objects_amqp) $(AMQP_SHARED_DEPENDENCIES)
+	$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_amqp) $(AMQP_SHARED_LIBADD)
+
