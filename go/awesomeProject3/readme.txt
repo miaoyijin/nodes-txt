@@ -19,4 +19,6 @@ git clone https://github.com/google/protobuf
 
 3:安装代码依赖包go get -u google.golang.org/grpc
 
-4：protoc --go-grpc_out=./ grpc.proto
+4：protoc  --go_out=. --go_opt=paths=source_relative
+ --go-grpc_out=. --go-grpc_opt=paths=source_relative
+ helloworld/helloworld/helloworld.proto
