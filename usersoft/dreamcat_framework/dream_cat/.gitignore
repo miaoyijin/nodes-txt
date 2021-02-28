@@ -1,0 +1,6 @@
+/.idea
+/vendor
+/cache
+/phpunit.xml
+/.phpunit.result.cache
+start.sh

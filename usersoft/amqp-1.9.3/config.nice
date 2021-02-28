@@ -1,0 +1,8 @@
+#! /bin/sh
+#
+# Created by configure
+
+'./configure' \
+'--with-php-config=/opt/app/php7/bin/php-config' \
+'--with-librabbitmq-dir=/usr/local/rabbitmq-c-0.7.1' \
+"$@"
