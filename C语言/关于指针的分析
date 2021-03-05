@@ -1,4 +1,5 @@
-    int * p_int;
+    p = (char *)(&"abcdefg");
+	int * p_int;
     p_int = (int *)&5;//错误整数不能这么使用, 因为这个5本身就没有存在地址里
     //说明编译时字符串和整数处理方式不同
     printf("%p pint", p_int);
