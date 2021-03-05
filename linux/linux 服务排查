@@ -12,3 +12,7 @@
 1：经过测试top:wa和网络没有太大关系
 2:vmstat的io也包括网络io
 3:vmstat 的wa只和磁盘有关
+
+负载升高排查利器
+
+ps -e -L h o state,cmd  | awk '{if($1=="R"||$1=="D"){print $0}}' | sort | uniq -c | sort -k 1nr
