@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'on');
 require_once'/opt/case/php_test/rabbitmq/vendor/autoload.php';
 
-$queue = 'simple_queue';//Ïû·ÑÕßºÍÂ·ÓÉÕâĞ©ÎŞ¹Ø,
+$queue = 'simple_queue';//æ¶ˆè´¹è€…å’Œè·¯ç”±è¿™äº›æ— å…³,
 
 $hosts = [
     [
@@ -14,9 +14,12 @@ $hosts = [
         'vhost' => 'cloud_union'
     ]
 ];
-//$exclusiveÖ»ÄÜÒ»¸öÏû·ÑÕß
+//$exclusiveåªèƒ½ä¸€ä¸ªæ¶ˆè´¹è€…
 
-//ÈçºÎ¶©ÔÄÖ¸¶¨µÄrouteKeyĞÅÏ¢
+//å¦‚ä½•è®¢é˜…æŒ‡å®šçš„routeKeyä¿¡æ¯
+/*$q = new AMQPQueue();
+    $q->bind();å¯ä»¥åŠé¡¶routkeyæ¶ˆè´¹
+    $q->consume();*/
 try {
     /** @var \PhpAmqpLib\Connection\AMQPStreamConnection $connect */
     $connect = \PhpAmqpLib\Connection\AMQPStreamConnection::create_connection($hosts);
@@ -29,7 +32,7 @@ try {
     );
     $channel->basic_consume($queue, 'TEST', false,false, false, false, function(\PhpAmqpLib\Message\AMQPMessage $message) {
         echo var_export($message->getRoutingKey(), true) . PHP_EOL;
-        //echo $message->getConsumerTag(); £¿£¿×÷ÓÃ
+        //echo $message->getConsumerTag(); ï¼Ÿï¼Ÿä½œç”¨
         echo $message->getDeliveryTag();
        // echo $message->getBody();
         $message->ack();
@@ -41,6 +44,6 @@ try {
 
 
 } catch (Throwable $e) {
-    echo '²¶»ñÒì³££º' . $e->getMessage();
+    echo 'æ•è·å¼‚å¸¸ï¼š' . $e->getMessage();
 }
 
