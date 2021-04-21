@@ -18,8 +18,9 @@ $hosts = [
 
 //如何订阅指定的routeKey信息
 /*$q = new AMQPQueue();
-    $q->bind();可以办顶routkey消费
-    $q->consume();*/
+    $q->bind();可以绑定routkey消费
+    $q->consume();
+*/
 try {
     /** @var \PhpAmqpLib\Connection\AMQPStreamConnection $connect */
     $connect = \PhpAmqpLib\Connection\AMQPStreamConnection::create_connection($hosts);
