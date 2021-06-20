@@ -1,0 +1,7 @@
+APM （Application Performance Management，即应用性能管理）
+
+
+
+OpenTracing
+OpenTracing是一个规范，类似于http规范。是一套api。
+skywalking就是基于这个api的一个比较好的实现。
