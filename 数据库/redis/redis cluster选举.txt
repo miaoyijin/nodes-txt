@@ -1,0 +1,7 @@
+slave发现自己的master变为FAIL
+将自己记录的集群currentEpoch加1，并广播FAILOVER_AUTH_REQUEST信息
+其他节点收到该信息，只有master响应，判断请求者的合法性，并发送FAILOVER_AUTH_ACK，对每一个epoch只发送一次ack
+尝试failover的slave收集FAILOVER_AUTH_ACK
+超过半数后变成新Master
+广播Pong通知其他集群节点。
+从节点并不是在主节点一进入 FAIL 状态就马上尝试发起选举，而是有一定延迟，一定的延迟确保我们等待FAIL状态在集群中传播，slave如果立即尝试选举，其它masters或许尚未意识到FAIL状态，可能会拒绝投票。
