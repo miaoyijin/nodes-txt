@@ -1,0 +1,39 @@
+一：哨兵集群模式搭建注意事项【哨兵间不需要配置信息，通过redissentinel：hello可以获取其他哨兵】
+
+
+二：哨兵的定时任务
+
+1、每个哨兵每10秒会向主节点和从节点发送info命令获取最新的拓扑结构图，哨兵配置时只需要配置对主节点的监控即可，通过向主节点发送info，获取从节点的信息，并当有新的从节点加入时可以马上感知。
+
+2、每个哨兵节点每隔2秒会向redis数据节点的指定频道上（sentinel：hello）发送该哨兵节点对于主节点的判断以及当前哨兵节点的信息，同时每个哨兵节点也会订阅该频道，来了解其他哨兵节点的信息以及对主节点的判断。
+
+信息补充：虽然sentinel集群中每个sentinel都互相连接彼此来检查对方的可用性以及互相发送消息。但是你不用在任何一个sentinel配置任何其他的snetinel节点。因为sentinel利用了master的发布/订阅机制去自动发现其它监控了统一master的sentinel节点。
+
+3、每隔1秒每个哨兵会向主节点、从节点、其他哨兵发送ping命令，做心跳检测。
+
+
+三：哨兵master选举
+
+基于Raft算法选举领头sentinel：
+
+到现在为止，已经知道了master客观下线，【那就需要一个sentinel来负责故障转移】，那到底是哪个sentinel节点来做这件事呢？需要通过选举实现，具体的选举过程如下：
+
+（1）判断客观下线的sentinel节点向其他 sentinel 节点发送 SENTINEL is-master-down-by-addr ip port current_epoch runid
+
+注意：这时的runid是自己的run id，每个sentinel节点都有一个自己运行时id
+
+（2）目标sentinel回复是否同意master下线并选举领头sentinel，选择领头sentinel的过程符合先到先得的原则。举例：sentinel1判断了客观下线，向sentinel2发送了第一步中的命令，sentinel2回复了sentinel1，说选你为领头，这时候sentinel3也向sentinel2发送第一步的命令，sentinel2会直接拒绝回复
+
+（3）当sentinel发现选自己的节点个数超过 majority 的个数的时候，自己就是领头节点
+
+（4）如果没有一个sentinel达到了majority的数量，等一段时间，重新选举
+
+
+
+四： master 选举过程【sentinel master 来完成该操作】
+
+① 选择优先级最高的节点，通过sentinel配置文件中的replica-priority配置项，这个参数越小，表示优先级越高
+
+② 如果第一步中的优先级相同，选择offset最大的，offset表示主节点向从节点同步数据的偏移量，越大表示同步的数据越多
+
+③ 如果第二步offset也相同，选择run id较小的
