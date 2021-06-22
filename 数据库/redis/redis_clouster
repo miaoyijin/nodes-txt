@@ -19,3 +19,14 @@ redis cluster 解决什么问题
 
 
 7：【不支持多數據庫空間，單機下的 redis 可以支持到 16 個數據庫，集群模式下只能使用 1 個數據庫空間，即 db 0。】
+
+
+
+8：redis 集群扩容命令
+
+    /usr/redis/bin/redis-cli --cluster add-node 192.168.0.106:7006  192.168.0.106:7000
+    
+	
+	/usr/redis/bin/redis-cli --cluster reshard 192.168.0.107:7006
+	 
+    reshard和 reblance 区别
