@@ -25,3 +25,8 @@ MySQL数据库的性能不会特别好，并且Buffer Pool越大，预热过程越长。
 
 
 ###mongodo 和mysql 数据的选择
+
+
+
+##
+MongoDB是文档型的行存储,行存储的读写过程是一致的
