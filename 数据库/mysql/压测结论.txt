@@ -1,1 +1,3 @@
-mysql 可以维持在1k个链接左右，qps：最高在2k 左右
+innodb:  mysql 可以维持在1k个链接左右，qps：最高在2k 左右
+
+根据压测结果：mysiam 读写速度快于innodb,    但是inndob 支持事务，能提供丰富的索引支持
