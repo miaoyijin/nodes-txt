@@ -19,12 +19,14 @@ tcp_keepalive_time (integer; default: 7200; since Linux 2.2)
       Note that underlying connection tracking mechanisms and
       application timeouts may be much shorter.
       
-      1.2 连接探活的过程
+【【      1.2 连接探活的过程
 开启SO_KEEPALIVE后，如果2小时内在此套接口的任一方向都没有数据交换，TCP就自动给对方发一个保持存活探测分节(keepalive probe)。这是一个对方必须响应的TCP分节.
 
 它会导致以下三种情况：
 
 对方接收一切正常：以期望的ACK响应。2小时后，TCP将发出另一个探测分节。
+】】
+
 对方已崩溃且已重新启动：以RST响应。套接口的待处理错误被置为ECONNRESET，套接 口本身则被关闭。
 对方无任何响应：源自berkeley的TCP发送另外8个探测分节，相隔75秒一个，试图得到一个响应。一共尝试9次，即在发出第一个探测分节11分钟 15秒后若仍无响应就放弃。套接口的待处理错误被置为ETIMEOUT，套接口本身则被关闭。如ICMP错误是“host unreachable(主机不可达)”，说明对方主机并没有崩溃，但是不可达，这种情况下待处理错误被置为 EHOSTUNREACH。
 根据上面的介绍我们可以知道对端以一种非优雅的方式断开连接的时候，我们可以设置SO_KEEPALIVE属性使得我们在2小时以后发现对方的TCP连接是否依然存在。
