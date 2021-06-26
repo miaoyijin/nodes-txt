@@ -8,7 +8,7 @@
 
 如何解决：让其子类实现工厂接口，返回的也是一个抽象的产品。
  
-例子：
+例子（简单工厂模式如下）：
 public interface Shape {
    void draw();
 }
@@ -48,7 +48,42 @@ public class Square implements Shape {
 }
 
 二：有哪些工厂模式
- 简单工厂模式，工厂方法模式(Factory Method)，抽象工厂模式(Abstract Factory)
+ 简单工厂模式，工厂方法模式(Factory Method)【多个方法】，抽象工厂模式(Abstract Factory)【多个工厂】
+ =======================================================================
+ 工厂方式代码：
+ AbstractFactory类：生产不同产品的工厂的抽象类
+
+public interface AbstractFactory {
+    Phone makePhone();
+}
+XiaoMiFactory类：生产小米手机的工厂（ConcreteFactory1）
+
+public class XiaoMiFactory implements AbstractFactory{
+    @Override
+    public Phone makePhone() {
+        return new MiPhone();
+    }
+}
+AppleFactory类：生产苹果手机的工厂（ConcreteFactory2）
+
+public class AppleFactory implements AbstractFactory {
+    @Override
+    public Phone makePhone() {
+        return new IPhone();
+    }
+}
+演示：
+
+复制代码
+public class Demo {
+    public static void main(String[] arg) {
+        AbstractFactory miFactory = new XiaoMiFactory();
+        AbstractFactory appleFactory = new AppleFactory();
+        miFactory.makePhone();            // make xiaomi phone!
+        appleFactory.makePhone();        // make iphone!
+    }
+}
+=======================================================================
  
  
  
