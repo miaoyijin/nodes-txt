@@ -1,0 +1,55 @@
+一：什么是工厂模式和解决什么问题以及应用场景
+
+意图：定义一个创建对象的接口，让其子类自己决定实例化哪一个工厂类，工厂模式使其创建过程延迟到子类进行。
+
+主要解决：主要解决接口选择的问题。
+
+何时使用：我们明确地计划不同条件下创建不同实例时。
+
+如何解决：让其子类实现工厂接口，返回的也是一个抽象的产品。
+ 
+例子：
+public interface Shape {
+   void draw();
+}
+
+public class Rectangle implements Shape {
+ 
+   @Override
+   public void draw() {
+      System.out.println("Inside Rectangle::draw() method.");
+   }
+}
+
+public class Square implements Shape {
+ 
+   @Override
+   public void draw() {
+      System.out.println("Inside Square::draw() method.");
+   }
+}
+ 
+ public class ShapeFactory {
+    
+   //使用 getShape 方法获取形状类型的对象
+   public Shape getShape(String shapeType){
+      if(shapeType == null){
+         return null;
+      }        
+      if(shapeType.equalsIgnoreCase("CIRCLE")){
+         return new Circle();
+      } else if(shapeType.equalsIgnoreCase("RECTANGLE")){
+         return new Rectangle();
+      } else if(shapeType.equalsIgnoreCase("SQUARE")){
+         return new Square();
+      }
+      return null;
+   }
+}
+
+二：有哪些工厂模式
+ 简单工厂模式，工厂方法模式(Factory Method)，抽象工厂模式(Abstract Factory)
+ 
+ 
+ 
+ 三： 工厂模式和适配器模式，IOC 关系
