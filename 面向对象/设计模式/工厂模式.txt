@@ -48,7 +48,7 @@ public class Square implements Shape {
 }
 
 二：有哪些工厂模式
- 简单工厂模式，工厂方法模式(Factory Method)【多个方法】，抽象工厂模式(Abstract Factory)【一个工厂接口，多个实现工厂】
+ 简单工厂模式，工厂方法模式(Factory Method)【多个方法】，抽象工厂模式(Abstract Factory)【一个工厂接口，多个实现工厂，抽象工厂上层需要一个适配器】
  =======================================================================
  工厂方式代码：
  AbstractFactory类：生产不同产品的工厂的抽象类
