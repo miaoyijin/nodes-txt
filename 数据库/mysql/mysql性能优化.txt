@@ -1,0 +1,37 @@
+innodb 性能优化
+1： 表示缓冲池字节大小。 推荐值为物理内存的50%~80%。 innodb_buffer_pool_size
+                
+                
+2： 用来控制redo log刷新到磁盘的策略。 innodb_flush_log_at_trx_commit=1
+                
+                
+3： 每提交1次事务同步写到磁盘中，可以设置为n。 sync_binlog=1
+                
+4：脏页占innodb_buffer_pool_size的比例时，触发刷脏页到磁盘。 推荐值为25%~50%。 innodb_max_dirty_pages_pct=30
+
+5: 默认200，如果SSD，调整为5000~20000
+innodb_io_capacity=200//每秒刷盘次数
+
+6： mysql 脏页查看
+SHOW GLOBAL STATUS LIKE '%Innodb_buffer_pool_pages_%';
+
+7：mysql server 线程详解
+          线程池方案下，用户的每个连接不再对应一个线程。线程池由一系列 worker 线程组成，这些worker线程被分为thread_pool_size个group。用户的连接按 round-robin 的方式映射到相应的group 中，一个连接可以由一个group中的一个或多个worker线程来处理。
+
+          listener 线程 每个group中有一个listener线程，通过epoll的方式来监听本group中连接的事件。listener线程同时也是worker线程，listener线程不是固定的。 listener线程监听到连接事件后会将事件放入优先级队列中，listener线程作为worker线程也处理一些连接事件，以减少上下文切换。 listener线程会检查优先级队列是否为空，如果为空表示网络空闲，listener线程会作为worker线程处理第一个监听事件，其他事件仍然放入优先级队列中。 另外，当没有活跃线时，listener会唤醒一个线程，如果没有线程可以唤醒，且当前group只有一个线程且为listener，则创建一个线程。
+
+          优先级队列 分为高优先级队列和普通队列，已经开启的事务并且tickets不为0，放入高优先队列，否则放入普通队列。每个连接在thread_pool_high_prio_tickets次被放到优先队列中后，会移到普通队列中。worker线程先从高优先队列取event处理，只有当高优先队列为空时才从普通队列取event处理。 通过优先级队列，可以让已经开启的事务或短事务得到优先处理，及时提交释放锁等资源。
+
+          worker 线程 worker线程负责从优先队列取事件处理。如果没有取到event，会尝试从epoll中取一个，如果没有取到再进入等待，如果等待超过thread_pool_idle_timeout worker线程会退出。
+
+          timer 线程 每隔thread_pool_stall_limit时间检查一次。
+          listener没有接收新的事件，listener正在等待时需调用wake_or_create_thread，重新创建listener；
+          从上一次检查起，worker线程没有收到新的事件，并且队列不为空，则认为发生了stall，需唤醒或创建worker线程；
+          检查net_wait_timeout是否超时，如果超时退出连接，而不是退出worker线程。
+          
+8： mysql innodb 线程【innodb 内部没有worker 线程，只是对线程做了并发数限制】
+
+通过前面的叙述可以我们知道，MySQL在Server层根本就没有对并发线程的数量进行控制，当MySQL的并发连接数增加时，就会导致对应的线程数量增加。
+这样可能把机器的大量CPU资源都耗费在线程切换上了，导致性能急剧下降。InnoDB为了缓解这种情况，通过设置系统变量set global innodb_thread_concurrency ＝ x可以控制内部并发线程的数量，
+也就是最多允许innodb_thread_concurrency个线程同时在InnoDB内部运行。也就是说在Server层可以创建很多线程，但是到了InnoDB内部，只会有少量线程并发执行，
+其他线程都处于sleep状态。示意图如下：
