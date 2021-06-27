@@ -1,0 +1,6 @@
+1：什么是半连接
+left jon 会把右表所有匹配的记录都选择出来，而半连接在右边选择了满足的条件，相同条件的数据则跳过匹配， 是对exist 和 in 查询效率的优化，MySQL 5.6后支持
+8.0 后可以explain ANALYZE 分析出来
+
+2: mysql 没有半连接关键字 left semi join
+mysql 会把exist 和 in 优化成半连接
