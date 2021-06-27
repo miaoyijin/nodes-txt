@@ -5,3 +5,6 @@ so_keepalive=30m::10 表示开启tcp探活，30分钟后伍数据会发送探活
 
 
 2： 应用层开启
+keepalive_timeout 0 //表示关闭
+
+stream keepalive  //开启代理层keepvailed
