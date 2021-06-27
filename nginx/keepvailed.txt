@@ -1,0 +1,7 @@
+一: nginx keepvailed 分为tcp 和 应用层
+
+1：tcp 设置： so_keepalive=on 表示开启tcp探活，并且使用系统内核的参数。
+so_keepalive=30m::10 表示开启tcp探活，30分钟后伍数据会发送探活包，时间间隔使用系统默认的，发送10次探活包。
+
+
+2： 应用层开启
