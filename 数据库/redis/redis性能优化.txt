@@ -1,0 +1,21 @@
+1: maxmemory 
+
+2: 淘汰策略删除
+
+3： 持久化设置
+生产环境一般采用aof
+
+4： 配置慢日志
+
+5：timeout 配置
+
+6：tcp-backlog
+
+7: 日志重写
+45) "auto-aof-rewrite-percentage"
+ 46) "100"
+ 47) "auto-aof-rewrite-min-size"
+ 48) "67108864"
+ 
+ 8： redis最大连接数
+ maxclients
