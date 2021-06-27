@@ -15,7 +15,13 @@ innodb_io_capacity=200//每秒刷盘次数
 6： mysql 脏页查看
 SHOW GLOBAL STATUS LIKE '%Innodb_buffer_pool_pages_%';
 
-7：mysql server 线程详解
+7：  thread_pool_size = cpu cores 设置线程池group的数量
+
+
+8：  thread_pool_oversubscribe = 8 每个group的最大线程数
+
+
+9：mysql server 线程详解
           线程池方案下，用户的每个连接不再对应一个线程。线程池由一系列 worker 线程组成，这些worker线程被分为thread_pool_size个group。用户的连接按 round-robin 的方式映射到相应的group 中，一个连接可以由一个group中的一个或多个worker线程来处理。
 
           listener 线程 每个group中有一个listener线程，通过epoll的方式来监听本group中连接的事件。listener线程同时也是worker线程，listener线程不是固定的。 listener线程监听到连接事件后会将事件放入优先级队列中，listener线程作为worker线程也处理一些连接事件，以减少上下文切换。 listener线程会检查优先级队列是否为空，如果为空表示网络空闲，listener线程会作为worker线程处理第一个监听事件，其他事件仍然放入优先级队列中。 另外，当没有活跃线时，listener会唤醒一个线程，如果没有线程可以唤醒，且当前group只有一个线程且为listener，则创建一个线程。
@@ -29,7 +35,7 @@ SHOW GLOBAL STATUS LIKE '%Innodb_buffer_pool_pages_%';
           从上一次检查起，worker线程没有收到新的事件，并且队列不为空，则认为发生了stall，需唤醒或创建worker线程；
           检查net_wait_timeout是否超时，如果超时退出连接，而不是退出worker线程。
           
-8： mysql innodb 线程【innodb 内部没有worker 线程，只是对线程做了并发数限制】
+10： mysql innodb 线程【innodb 内部没有worker 线程，只是对线程做了并发数限制】
 
 通过前面的叙述可以我们知道，MySQL在Server层根本就没有对并发线程的数量进行控制，当MySQL的并发连接数增加时，就会导致对应的线程数量增加。
 这样可能把机器的大量CPU资源都耗费在线程切换上了，导致性能急剧下降。InnoDB为了缓解这种情况，通过设置系统变量set global innodb_thread_concurrency ＝ x可以控制内部并发线程的数量，
