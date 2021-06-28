@@ -24,8 +24,21 @@
  9: client-query-buffer-limit 客户端输入缓冲区
  
  10：输出缓冲区 
+ 
  client-output-buffer-limit normal 0 0 0
  
-client-output-buffer-limit slave 256mb 64mb 60【新版本client-output-buffer-limit replica 256mb 64mb 60】
+client-output-buffer-limit slave 256mb 64mb 60【新版本client-output-buffer-limit replica 256mb 64mb 60，控制挤压缓冲区的大小即replication buffer】
  
 client-output-buffer-limit pubsub 32mb 8mb 60
+
+11：repl-backlog-size 全局只有一份
+
+12：
+buffer 对比
+replication buffer 对应于每个 slave，通过 config set client-output-buffer-limit slave 设置。
+repl_backlog_buffer 是一个环形缓冲区，整个 master 进程中只会存在一个，所有的 slave 公用。repl_backlog 的大小通过 repl-backlog-size 参数设置，默认大小是 1M，其大小可以根据每秒产生的命令、（master 执行 rdb bgsave） +（ master 发送 rdb 到 slave） + （slave load rdb 文件）时间之和来估算积压缓冲区的大小，repl-backlog-size 值不小于这两者的乘积。
+总的来说，replication buffer 是主从库在进行全量复制时，主库上用于和从库连接的客户端的 buffer，而 repl_backlog_buffer 是为了支持从库增量复制，主库上用于持续保存写操作的一块专用 buffer。
+
+repl_backlog_buffer 是一块专用 buffer，在 Redis 服务器启动后，开始一直接收写操作命令，这是所有从库共享的。主库和从库会各自记录自己的复制进度，所以，不同的从库在进行恢复时，会把自己的复制进度（slave_repl_offset）发给主库，主库就可以和它独立同步。
+
+如图所示：
