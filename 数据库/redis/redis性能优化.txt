@@ -19,3 +19,13 @@
  
  8： redis最大连接数
  maxclients
+ 
+ 
+ 9: client-query-buffer-limit 客户端输入缓冲区
+ 
+ 10：输出缓冲区 
+ client-output-buffer-limit normal 0 0 0
+ 
+client-output-buffer-limit slave 256mb 64mb 60
+ 
+client-output-buffer-limit pubsub 32mb 8mb 60
