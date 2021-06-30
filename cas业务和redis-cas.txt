@@ -9,14 +9,14 @@
 mysql cas实现：
 select num from stock where sid=3 //此处查出num = 3;
 升级为：
-update stock set num=$num_new where sid=$sid and num=3
+update stock set num=$num_new where sid=$sid and num=3【也可以num > 0】
 即为cas。
+
 
 mysql版本号实现：
 update table set name = 'Aron', version = version + 1 where id = #{id} and version = #{version};
 
-mysql普通乐观锁：
-update stock set num=$num_new where sid=$sid and num > 0
+
 
 redis实现：
 
