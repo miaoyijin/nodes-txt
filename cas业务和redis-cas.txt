@@ -1,20 +1,32 @@
-1: 需要解决的问题：高并发下查询和修改的数据一致性问题，【解决数据一致性】
+1: 需要解决的问题：单体事务在并发下查询和修改的数据一致性问题，【解决数据一致性】
 
 2: 解决方式：实现方式有乐观锁和悲观锁
 
-3: 乐观锁实现方式: cas,版本号，redis事务watch，mvcc等
+3: 乐观锁实现方式: cas,版本号,redis事务watch等【乐观锁只是一种加锁思想和cas没有绝对关系】
 
 4:cas实现方式
 
-mysql实现
-update stock set num=$num_new where sid=$sid
+mysql cas实现：
+select num from stock where sid=3 //此处查出num = 3;
 升级为：
-update stock set num=$num_new where sid=$sid and num=$num_old
-即可。
+update stock set num=$num_new where sid=$sid and num=3
+即为cas。
 
+mysql版本号实现：
+update table set name = 'Aron', version = version + 1 where id = #{id} and version = #{version};
 
-mysql版本号实现update table set name = 'Aron', version = version + 1 where id = #{id} and version = #{version};
+mysql普通乐观锁：
+update stock set num=$num_new where sid=$sid and num > 0
 
+redis实现：
 
-redis实现
 redis事务mutil + watch
+
+
+5:分布式事务解决方案：
+tcc，2pc，3pc
+
+6:tcc和cas关系：
+分布式事务解决方式有tcc,2pc，3pc, 其中的加锁方式可以使用cas,cas是关于锁的实现思想，tcc,2pc，3pc是更高层面的解决方案
+
+7:2pc 例子
