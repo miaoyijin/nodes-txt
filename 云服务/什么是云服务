@@ -1,6 +1,9 @@
-�Ʒ���ֻ��һ��ͳ�ƣ����Էֳ��Ĵ��ࡣ
+云服务只是一个统称，可以分成四大类。
 
-IaaS��������ʩ����Infrastructure-as-a-service
-PaaS��ƽ̨����Platform-as-a-service
-SaaS����������Software-as-a-service
-serverLess��
+IaaS：基础设施服务，Infrastructure-as-a-service
+PaaS：平台服务，Platform-as-a-service
+SaaS：软件服务，Software-as-a-service
+
+按照应用类别分为，存储，计算，应用三大类
+
+其中应用云服务分为云原生和openstack两种架构
