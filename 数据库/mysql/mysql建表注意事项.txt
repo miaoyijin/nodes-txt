@@ -1,14 +1,14 @@
 注意事项如下：
 
-1：mysql建表引擎选择
+一：mysql建表引擎选择
 
 略
-2：mysql 字段选择
+二：mysql 字段选择
 
 1: 可以使用tyint的使用tyint 
 2：可以使用int 的使用int
 3: 字段not null 
-4：优先考虑char,varchar,text【varchar可以建立索引，查询性能高，text只支持全文索引,性能低,查询准确度低】
+4：优先考虑char,varchar,text【varchar可以建立btree索引，查询性能高，text只支持全文索引,性能低,查询准确度低】
 
 【
 -varchar 和 text字段对比：text只能简历全文索引
@@ -33,4 +33,9 @@
 6：每个表加上updatetime 和addtime 字段
 7:大文本字段考虑分表
 
-3: mysql索引的选择
+三: mysql索引的选择
+
+1: 选择唯一性索引
+2：外键做索引
+3：选择区分度高的列作为索引
+4：为经常需要where查询排序、分组和联合操作的字段建立索引
