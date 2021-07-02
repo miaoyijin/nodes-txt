@@ -1,0 +1,6 @@
+LSM树(Log-Structured-Merge-Tree)的名字往往会给初识者一个错误的印象，
+事实上，LSM树并不像B+树、红黑树一样是一颗严格的树状数据结构，它其实是一种存储结构，目前HBase,LevelDB,RocksDB这些NoSQL存储都是采用的LSM树。
+
+1:memtabl 在内存中是一颗有序树
+
+2： 有序树内存满了会被flush到数据内存里面，所以叫做 日志合并树
