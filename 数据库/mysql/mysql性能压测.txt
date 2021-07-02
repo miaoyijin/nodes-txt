@@ -1,0 +1,84 @@
+1: 测试命令eg： mysqlslap -uroot -proot --auto-generate-sql --engine=myisam,innodb --concurrency=1000 --number-of-queries=20000 
+
+
+2：测试案例如下：
+
+场景压测
+
+例子1：读情况下
+mysqlslap -uroot -proot --auto-generate-sql --engine=myisam,innodb --concurrency=1000 --number-of-queries=20000 --auto-generate-sql-load-type=read
+Benchmark
+        Running for engine myisam
+        Average number of seconds to run all queries: 1.860 seconds
+        Minimum number of seconds to run all queries: 1.860 seconds
+        Maximum number of seconds to run all queries: 1.860 seconds
+        Number of clients running queries: 500
+        Average number of queries per client: 40
+
+Benchmark
+        Running for engine innodb
+        Average number of seconds to run all queries: 0.766 seconds
+        Minimum number of seconds to run all queries: 0.766 seconds
+        Maximum number of seconds to run all queries: 0.766 seconds
+        Number of clients running queries: 500
+        Average number of queries per client: 40
+
+Benchmark
+        Running for engine myisam
+        Average number of seconds to run all queries: 4.922 seconds
+        Minimum number of seconds to run all queries: 4.922 seconds
+        Maximum number of seconds to run all queries: 4.922 seconds
+        Number of clients running queries: 4000
+        Average number of queries per client: 10
+
+Benchmark
+        Running for engine innodb
+        Average number of seconds to run all queries: 6.031 seconds
+        Minimum number of seconds to run all queries: 6.031 seconds
+        Maximum number of seconds to run all queries: 6.031 seconds
+        Number of clients running queries: 4000
+        Average number of queries per client: 10
+        
+      读：并发数少的情况下innodb更占优势，大并发下mysiam具有优势【读锁是共享锁，相当于没有加锁，但是innodb需要开启mvcc，所以慢】
+例子2：插入速度测试    
+mysqlslap -uroot -proot --auto-generate-sql --engine=myisam,innodb --concurrency=1000 --number-of-queries=20000 --auto-generate-sql-load-type=write
+mysqlslap: [Warning] Using a password on the command line interface can be insecure.
+Benchmark
+        Running for engine myisam
+        Average number of seconds to run all queries: 3.953 seconds
+        Minimum number of seconds to run all queries: 3.953 seconds
+        Maximum number of seconds to run all queries: 3.953 seconds
+        Number of clients running queries: 500
+        Average number of queries per client: 40
+
+Benchmark
+        Running for engine innodb
+        Average number of seconds to run all queries: 9.922 seconds
+        Minimum number of seconds to run all queries: 9.922 seconds
+        Maximum number of seconds to run all queries: 9.922 seconds
+        Number of clients running queries: 500
+        Average number of queries per client: 40
+        
+Benchmark
+        Running for engine myisam
+        Average number of seconds to run all queries: 103.828 seconds
+        Minimum number of seconds to run all queries: 103.828 seconds
+        Maximum number of seconds to run all queries: 103.828 seconds
+        Number of clients running queries: 1000
+        Average number of queries per client: 20
+
+Benchmark
+        Running for engine innodb
+        Average number of seconds to run all queries: 22.672 seconds
+        Minimum number of seconds to run all queries: 22.672 seconds
+        Maximum number of seconds to run all queries: 22.672 seconds
+        Number of clients running queries: 1000
+        Average number of queries per client: 20
+在高并发下innodb有强大的优势，低并发mysiam更具优势
+
+3：更新情况测试
+mysqlslap -uroot -proot --auto-generate-sql --engine=myisam,innodb --concurrency=1000 --number-of-queries=20000 --auto-generate-sql-load-type=update
+更新是innodb 更强势，测试结果不可行，是因为innodb没有索引，造成全局锁表更新，所以更新的场景压测需要写代码实现
+
+
+
