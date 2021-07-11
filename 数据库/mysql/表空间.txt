@@ -9,5 +9,8 @@ innodb底层存储实现方式，mysiam 没有表空间概念
 4：独立表空间 保存独立的库数据，索引 等
 
 5：inndodb有哪些表空间和ibdata又是什么关系
- innodb有如下表空间
+ innodb有如下表空间：ibtmp1(临时表空间)，undo tablespace(需要单独配置，如果没有配置则undolog还是保存到系统表空间),ibdata1(系统表空间), 独立表空间
+ 
+ 
+ 6： 表空间的逻辑构造
 
