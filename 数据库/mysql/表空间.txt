@@ -2,3 +2,10 @@
 innodb底层存储实现方式，mysiam 没有表空间概念
 
 2： innodb存储数据有.FRM存放表定义，.ibd(独享表空间)，.ibdata(共享表空间).
+
+
+3： 共享表空间存什么，mysql 系统表的信心，undo log ，rego log,double write buffer 等
+
+4：独立表空间 保存独立的库数据，索引 等
+
+5：有哪些表空间和ibdata又是什么关系
