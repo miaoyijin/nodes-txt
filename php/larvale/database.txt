@@ -1,0 +1,18 @@
+一： larvale数据库驱动分为两部分
+1： 查询器查询
+返回结构【返回的是数组】：Illuminate\Support\Collection::__set_state(array( 'items' => array ( 0 => (object) array( 'id' => 1, 'username' => '2345',
+'avatar' => '', 'mobile' => '17621707088', 'email' => '', 'birthday' => '0000-00-00', 'sex' => 0, 'enabled' => 1, 'is_authenticate' => 0,
+'created_at' => '2021-07-10 17:04:41', 'updated_at' => '2021-07-10 17:04:41', ), ), ))
+
+2： orm查询
+返回结构【返回的是activeRecord】：Illuminate\Database\Eloquent\Collection::__set_state(array( 'items' => array ( 0 => App\Models\Users\User::__set_state(array
+( 'connection' => 'mysql', 'table' => 'user', 'timestamps' => true, 'primaryKey' => 'id', 'fillable' => array ( 0 => 'id', 1 => 'username',
+2 => 'avatar', 3 => 'mobile', 4 => 'email', 5 => 'birthday', 6 => 'sex', 7 => 'enabled', 8 => 'user_grade_id', 9 => 'user_experience',
+10 => 'hsq_user_id', 11 => 'currency', 12 => 'user_rack_grade_id', 13 => 'source_type', 14 => 'updated_at', 15 => 'created_at', ), 'pageNum' => 1, 
+'pageSize' => 20, 'maxLimit' => 1000, 'keyType' => 'int', 'incrementing' => true, 'with' => array ( ), 'withCount' => array ( ), 'perPage' => 15,
+'exists' => true, 'wasRecentlyCreated' => false, 'attributes' => array ( 'id' => 1, 'username' => '2345', 'avatar' => '', 'mobile' => '17621707088',
+'email' => '', 'birthday' => '0000-00-00', 'sex' => 0, 'enabled' => 1, 'is_authenticate' => 0, 'created_at' => '2021-07-10 17:04:41', 'updated_at' => '2021-07-10 17:04:41', )
+, 'original' => array ( 'id' => 1, 'username' => '2345', 'avatar' => '', 'mobile' => '17621707088', 'email' => '', 'birthday' => '0000-00-00', 'sex' => 0, 'enabled' => 1,
+'is_authenticate' => 0, 'created_at' => '2021-07-10 17:04:41', 'updated_at' => '2021-07-10 17:04:41', ), 'changes' => array ( ), 'casts' => array ( ), 'dates' => array ( ),
+'dateFormat' => NULL, 'appends' => array ( ), 'dispatchesEvents' => array ( ), 'observables' => array ( ), 'relations' => array ( ), 'touches' => array ( ),
+'hidden' => array ( ), 'visible' => array ( ), 'guarded' => array ( 0 => '*', ), )), ), ))
