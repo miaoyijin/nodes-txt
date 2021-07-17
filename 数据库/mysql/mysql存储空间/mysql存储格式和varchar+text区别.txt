@@ -1,0 +1,49 @@
+1）MyISAM有3种行存储格式：fixed/dynamic/compressed；
+
+
+2）：mysql有哪些文件格式
+
+Antelope（非压索格式）和 Barracuda（压索格式）
+
+
+3）：mysql 有哪些行存储格式
+Antelope ：    COMPACT，REDUNDANT
+Barracuda： DYNAMIC和COMPRESSED
+
+4）区别 
+- text 是要要进overflow存储。 也是对于text字段，不会和行数据存在一起。但原则上不会全部overflow ,
+会有768字节和原始的行存储在一块，多于768的行会存在和行相同的Page或是其它Page上。
+  
+- varchar 在MySQL内部属于从blob发展出来的一个结构，在早期版本中innobase【Antelope 】中，也是768字节以后进行overfolw存储。
+  
+- 对于Innodb-plugin【Barracuda： 】后： 对于变长字段处理都是20Byte后进行overflow存储
+（在新的row_format下：dynimic compress）
+
+
+5）那问题来了？ 为什么varchar(255+)存储上和text很相似了，但为什么还要有varchar, mediumtext, text这些类型？
+（从存储上来讲大于255的varchar可以说是转换成了text.这也是为什么varchar大于65535了会转成mediumtext)
+
+我理解：这块是一方面的兼容，另一方面在非空的默认值上varchar和text有区别。从整体上看功能上还是差别的。
+
+这里还涉及到字段额外开销的：
+
+- varchar 小于255byte  1byte overhead
+- varchar 大于255byte  2byte overhead
+ 
+- tinytext 0-255 1 byte overhead
+- text 0-65535 byte 2 byte overhead
+- mediumtext 0-16M  3 byte overhead
+ 
+- longtext 0-4Gb 4byte overhead
+备注 overhead是指需要几个字节用于记录该字段的实际长度。
+
+从处理形态上来讲varchar 大于768字节后，实质上存储和text差别不是太大了。 基本认为是一样的。
+另外从8000byte这个点说明一下： 对于varcahr, text如果行不超过8000byte（大约的数，innodb data page的一半）
+ ,overflow不会存到别的page中。基于上面的特性可以总结为text只是一个MySQL扩展出来的特殊语法有兼容的感觉。
+
+6）什么是blob
+
+一般在保存少量字符串的时候，我们会选择CHAR或者VARCHAR,而在保存较大文本时，通常会选择使用TEXT或者BLOB。
+二者之间的主要差别是BLOB能用来保存二进制数据，比如照片；而TEXT只能保存字符数据，比如一遍文章或日记。
+TEXT和BLOB中又分别包括TEXT,MEDIUMTEXT,LONGTEXT和BLOB,MEDIUMBLOB,LONGBLOB三种不同的类型
+ 
