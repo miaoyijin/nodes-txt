@@ -8,7 +8,7 @@ Antelope（非压索格式）和 Barracuda（压索格式）
 
 3）：mysql 有哪些行存储格式
 Antelope ：    COMPACT，REDUNDANT【varchar 和 text 多于768的行会存在和行相同的Page或是其它Page上】
-Barracuda： DYNAMIC【默认】和COMPRESSED【COMPRESSED才是压压缩格式存储，压缩率大概在50%， 溢出方式:TEXT/BLOB小于或等于40字节的列总是在线存储的，超出则存指针】
+Barracuda： DYNAMIC【默认】和COMPRESSED【COMPRESSED才是压压缩格式存储，压缩率大概在50%， 溢出方式:TEXT/BLOB小于或等于40字节的列总是在线存储的，超出则存指针（溢出情况待定）】
 压索格式到底怎么压缩：影响数据文件压缩效率的一个关键因素是数据本身的结构，在块数据中，压缩是通过识别【重复字符】进行压缩的，
 对于完全随机的数据是一个糟糕的情况，一般而言，有重复数据的压缩更好。对于字符串的列压缩就不错
 
@@ -19,7 +19,7 @@ Barracuda： DYNAMIC【默认】和COMPRESSED【COMPRESSED才是压压缩格式�
   
 - varchar 在MySQL内部属于从blob发展出来的一个结构，在早期版本中innobase【Antelope 】中，也是768字节以后进行overfolw存储。
   
-- 对于Innodb-plugin【Barracuda： 数据页只包含指向溢出页面的20字节指针,TEXT/BLOB小于或等于40字节的列总是在线存储的 】后： 对于变长字段处理都是20Byte后进行overflow存储
+- 对于Innodb-plugin【Barracuda： 数据页只包含指向溢出页面的20字节指针,TEXT/BLOB小于或等于40字节的列总是在线存储的（溢出情况待定）】后： 对于变长字段处理都是20Byte后进行overflow存储
 （在新的row_format下：dynimic compress）
 
 
