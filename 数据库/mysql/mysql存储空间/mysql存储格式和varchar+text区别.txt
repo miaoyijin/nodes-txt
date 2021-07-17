@@ -8,7 +8,7 @@ Antelope（非压索格式）和 Barracuda（压索格式）
 
 3）：mysql 有哪些行存储格式
 Antelope ：    COMPACT，REDUNDANT【varchar 和 text 多于768的行会存在和行相同的Page或是其它Page上】
-Barracuda： DYNAMIC【默认】和COMPRESSED【COMPRESSED才是压压缩格式存储，】
+Barracuda： DYNAMIC【默认】和COMPRESSED【COMPRESSED才是压压缩格式存储，压缩率大概在50%，】
 压索格式到底怎么压缩：影响数据文件压缩效率的一个关键因素是数据本身的结构，在块数据中，压缩是通过识别【重复字符】进行压缩的，
 对于完全随机的数据是一个糟糕的情况，一般而言，有重复数据的压缩更好。对于字符串的列压缩就不错
 
