@@ -13,6 +13,149 @@ lvs 工作模式 DR模式，nat模式等
 
 
 3）：lvs和hproxy4层负载区别
+hproxy是工作在第四层，有自身流量，代理性能不好
+
+
+hproxy 可以根据域名做配置
+# 配置文件
+【-------------------------------------------------------
+# 全局配置
+global
+
+    # 设置日志文件输出定向
+    log 127.0.0.1 local3 info
+
+    # 改变当前工作目录
+    chroot /usr/local/haproxy
+
+    # 用户与用户组
+    user haproxy
+    group haproxy
+
+    # 守护进程启动，运维方式为后台工作
+    daemon
+
+    # 最大连接数
+    maxconn 4000
+
+# 作用于其后紧跟的listen块，直至下一个defaults 块，下一个default 将替换上一个块作用于以后的listen 
+defaults
+
+    # 启用每个实例日志记录事件和流量。
+    log global
+    
+    # 默认的模式mode { tcp|http|health }，tcp是4层，http是7层，health只会返回OK
+    mode http
+
+    # maxconn 65535         maxconn 每个进程可用的最大连接数
+    # retries 3         当对server的connection失败后，重试的次数 　
+    # option abortonclose     启用或禁用在队列中挂起的中止请求的早期丢弃 
+    # option redispatch     启用或禁用在连接故障情况下的会话重新分配 
+    # option dontlognull     启用和禁用 记录 空连接
+    # option httpclose         每次请求完毕后主动关闭http通道，HA-Proxy不支持keep-alive模式 
+    # option forwardfor     获得客户端IP 
+    # option httplog        记录HTTP 请求,session 状态和计时器 
+    option httplog
+    option dontlognull
+    timeout connect 5000
+    timeout client 50000
+    timeout server 50000
+
+
+#前端配置，http_front名称可自定义
+frontend http_front
+    
+    # bind *:443 ssl crt /etc/haproxy/cert.pem        启用ssl证书 
+    # bind *:80                        发起http请求道80端口，会被转发到设置的ip及端口
+    bind *:80
+
+    #haproxy的状态管理页面，通过/haproxy?stats来访问
+    stats uri /haproxy?stats
+    default_backend http_back
+
+#后端配置，http_back名称可自定义
+backend http_back
+
+    # 负载均衡方式
+    # source 根据请求源IP
+    # static-rr 根据权重
+    # leastconn 最少连接者先处理
+    # uri 根据请求的uri
+    # url_param 根据请求的url参数
+    # rdp-cookie 据据cookie(name)来锁定并哈希每一次请求
+    # hdr(name) 根据HTTP请求头来锁定每一次HTTP请求
+    # roundrobin 轮询方式
+    balance roundrobin
+
+    #设置健康检查页面
+    option httpchk GET /index.html
+
+    #传递客户端真实IP
+    option forwardfor header X-Forwarded-For
+
+    # inter 2000 健康检查时间间隔2秒
+    # rise 3 检测多少次才认为是正常的
+    # fall 3 失败多少次才认为是不可用的
+    # weight 30 权重
+    # 需要转发的ip及端口
+    server node1 192.168.179.131:8081 check inter 2000 rise 3 fall 3 weight 30
+    server node2 192.168.179.131:8082 check inter 2000 rise 3 fall 3 weight 30
+
+-------------------------------------------------------
+
+
+
+# haproxy的acl规则
+-------------------------------------------------------
+
+frontend http_front
+    bind *:80
+    stats uri /haproxy?stats
+ 
+    #创建一个acl，is_http_back2是acl的名称，可自定义，用于判断主机名是否为www.back2.com
+    acl is_http_back2 hdr_end(host) www.back2.com
+
+    #通过正则判断主机名中是否为bbs.back.com或forum.back.com
+    acl is_host_bbs hdr_reg(host) -i ^(bbs.back.com|forum.back.com)
+
+    #判断ua是否为android
+    acl is_ua_android hdr_reg(User-Agent) -i android
+
+    #判断主机名开头是否为img.或css.或js.
+    acl is_host_static hdr_beg(host) -i img. css. js.
+
+    #判断url路径中是否有/bbs
+    acl is_path_bbs path_beg -i /bbs
+
+    #判断url文件结尾
+    acl is_php path_end -i .php
+
+    #通过正则判断url中结尾以
+    acl is_static_file url_reg -i /*.(css|jpg|png|jpeg|gif)$
+
+    #效果同上
+    acl is_static_file2 path_end -i .css .jpg .png .jpeg .gif
+
+    #如果主机名是www.back2.com那么就使用后端http_back2
+    use_backend http_back2ifis_http_back2
+
+    #默认使用的后端
+    default_backend http_back
+
+backend http_back
+    balance roundrobin
+    option httpchk GET /index.html
+    option forwardfor header X-Forwarded-For
+    server node1 192.168.1.222:8080 check inter 2000 rise 3 fall 3 weight 30
+
+backend http_back2
+    balance roundrobin
+    option httpchk GET /index.html
+    option forwardfor header X-Forwarded-For
+    server node2 192.168.1.222:8082 check inter 2000 rise 3 fall 3 weight 30
+
+-------------------------------------------------------】
+
 
 
 4）：负载均衡调度算法
