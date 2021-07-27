@@ -1,0 +1,90 @@
+【key_length的长度和row的空字段存储不一样】
+
+mysql的explain命令可以分析sql的性能，其中有一项是key_len（索引的长度）的统计。本文将分析mysql explain中key_len的计算方法。
+
+
+1.创建测试表及数据
+CREATE TABLE `member` (
+ `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+ `name` varchar(20) DEFAULT NULL,
+ `age` tinyint(3) unsigned DEFAULT NULL,
+ PRIMARY KEY (`id`),
+ KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `member` (`id`, `name`, `age`) VALUES (NULL, 'fdipzone', '18'), (NULL, 'jim', '19'), (NULL, 'tom', '19');
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+
+2.查看explain
+name的字段类型是varchar(20)，字符编码是utf8，一个字符占用3个字节，那么key_len应该是 20*3=60。
+
+mysql> explain select * from `member` where name='fdipzone';
++----+-------------+--------+------+---------------+------+---------+-------+------+-----------------------+
+| id | select_type | table  | type | possible_keys | key  | key_len | ref   | rows | Extra                 |
++----+-------------+--------+------+---------------+------+---------+-------+------+-----------------------+
+|  1 | SIMPLE      | member | ref  | name          | name | 63      | const |    1 | Using index condition |
++----+-------------+--------+------+---------------+------+---------+-------+------+-----------------------+
+1
+2
+3
+4
+5
+6
+explain的key_len为63，多出了3。
+
+
+name字段是允许NULL，把name改为NOT NULL再测试
+
+ALTER TABLE `member` CHANGE `name` `name` VARCHAR(20) NOT NULL;
+
+mysql> explain select * from `member` where name='fdipzone';
++----+-------------+--------+------+---------------+------+---------+-------+------+-----------------------+
+| id | select_type | table  | type | possible_keys | key  | key_len | ref   | rows | Extra                 |
++----+-------------+--------+------+---------------+------+---------+-------+------+-----------------------+
+|  1 | SIMPLE      | member | ref  | name          | name | 62      | const |    1 | Using index condition |
++----+-------------+--------+------+---------------+------+---------+-------+------+-----------------------+
+1
+2
+3
+4
+5
+6
+7
+8
+现在key_len为62，比刚才少了1，但还是多了2。可以确定，字段为NULL会多占用一个字节。
+
+
+name字段类型为varchar，属于变长字段，把varchar改为char再测试
+
+ALTER TABLE `member` CHANGE `name` `name` CHAR(20) NOT NULL;
+
+mysql> explain select * from `member` where name='fdipzone';
++----+-------------+--------+------+---------------+------+---------+-------+------+-----------------------+
+| id | select_type | table  | type | possible_keys | key  | key_len | ref   | rows | Extra                 |
++----+-------------+--------+------+---------------+------+---------+-------+------+-----------------------+
+|  1 | SIMPLE      | member | ref  | name          | name | 60      | const |    1 | Using index condition |
++----+-------------+--------+------+---------------+------+---------+-------+------+-----------------------+
+1
+2
+3
+4
+5
+6
+7
+8
+改为定长字段后，key_len为60，与预测的一致。
+
+
+总结：使用变长字段需要额外增加2个字节，使用NULL需要额外增加1个字节，因此对于是索引的字段，最好使用定长和NOT NULL定义，提高性能。
+————————————————
+版权声明：本文为CSDN博主「傲雪星枫」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/fdipzone/article/details/55804684
