@@ -1,0 +1,15 @@
+ZADD，O(logN)
+ZRANK，O(logN)
+ZSCORE，O(1)
+
+
+zsore为什么是o(1)
+有序集合对象的数据结构如下
+
+typedef struct zset {
+ 
+    zskiplist *zsl;
+ 
+    dict *dict;
+ 
+} zset;
