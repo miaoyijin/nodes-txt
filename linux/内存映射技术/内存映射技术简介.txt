@@ -1,0 +1,5 @@
+内存相关的技术mmap和mmu，sendfile
+
+mmap函数和mmu的关系：mmap函数的基石是mmu，mmu内部又有mmap结构体
+
+mmap零拷贝技术：减少了拷贝但是还是会发生系统调用
