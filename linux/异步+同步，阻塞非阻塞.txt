@@ -9,17 +9,13 @@
 fcntl可以修改block和no-block属性
 
 
-3:阻塞io多路复用例子
+3:阻塞io多路复用例子 or 非阻塞io多路复用例子
 $clients = epoll_wait()
 foreach($client as $c) {
-    $str = fread($c);
-}
-非阻塞io多路复用例子
-$clients = epoll_wait()
-foreach($client as $c) {
-    while(1) {
-       $str = fread($c);
+ while(feof($c)) {
+       $str = fread($c,1024);//非阻塞则无数据立即返回，阻塞则挂起进程，所以redis 链接都会设置成非阻塞模式
     }
+   
 }
 4: 关于epoll 两种模式说明
 
