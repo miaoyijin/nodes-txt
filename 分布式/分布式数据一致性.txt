@@ -26,6 +26,7 @@
 事务一致性方案：ACID, CAP , BASE
 
  ACID: 适合单机mysql，通过锁和mvcc达到强一致性
+ XA： 
  
  CAP和BASE:  分布式事务理论基础，可以选择强一致性和弱一致性
  
