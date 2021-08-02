@@ -1,10 +1,10 @@
-什么是数据一致性:  对数据做了修改，读取到的数据需要和写入的一致
+一：  什么是数据一致性:  对数据做了修改，读取到的数据需要和写入的一致
 
 
-二: 一致性分为哪几个领域: 主从副本一致性【zookeeper, mysql master -> mysql slave， redis master -> slave 】，事务一致性【mysql single, mysql 和 redis，mysql到mysql等】
+二:  一致性分为哪几个领域: 主从副本一致性【zookeeper, mysql master -> mysql slave， redis master -> slave 】，事务一致性【mysql single, mysql本地夸库事务, mysql 和 redis，mysql到mysql等】
 
 
-主从复制数据一致性的解决方案:  强一致性，弱一致性
+三：  主从复制数据一致性的解决方案:  强一致性，弱一致性
    a) mysql强一致性可以开启数据全同步机制
    b) mysql弱一致性，异步复制和半同步复制
    c) redis 主从复制是弱一致性
@@ -23,16 +23,16 @@
     相对于异步复制，半同步复制提高了数据的安全性，同时它也造成了一定程度的延迟，这个延迟最少是一个TCP/IP往返的时间。所以，半同步复制最好在低延时的网络中使用。
     】
 
-事务一致性方案：ACID, CAP , BASE
+四： 事务一致性方案：ACID, CAP , BASE
 
- ACID: 适合单机mysql，通过锁和mvcc达到强一致性
- XA： 
+ ACID: 适合单机mysql，本地夸库事务， 通过锁和mvcc达到强一致性
+ 
+ 
  
  CAP和BASE:  分布式事务理论基础，可以选择强一致性和弱一致性
  
- 强一致性方案：2pc,3pc,tcc
- 
- 
+ XA强一致性方案： 2pc,3pc,tcc，mysql内部也实现了xa
+
  事务弱一致性方案：binlog同步方案，触发器，常规业务写法【顺序业务逻辑+最终一致性方案】
 
 
