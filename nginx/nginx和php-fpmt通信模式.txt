@@ -1,0 +1,1 @@
+nginx 和phpfpm 通过socket 或是unixsocket 通信
