@@ -1,3 +1,20 @@
+一: php7加入了ast语法树
+
+1、Lexing：词法扫描分析，将源文件转换成 token 流；
+
+2、Parsing：语法分析，在此阶段生成 op arrays。
+==========
+
+PHP7 中在语法分析阶段不再直接生成 op arrays，而是先生成 AST，所以过程多了一步：
+
+1、Lexing：词法扫描分析，将源文件转换成 token 流；
+
+2、Parsing：语法分析，从 token 流生成抽象语法树AST；
+
+3、Compilation：从抽象语法树生成 op arrays。
+
+
+
 1:php5结构体
 typedef struct _hashtable {  
     uint nTableSize;//4 哈希表中Bucket的槽的数量，初始值为8，每次resize时以2倍速度增长
